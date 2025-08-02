@@ -79,11 +79,17 @@ end, { desc = "Go to next diagnostic message" })
 
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
+
+-- Neotree toggle
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true })
 
 -- Terminal toggle
 vim.keymap.set("n", "<leader>tt", function()
-	local root = vim.fn.getcwd() -- Or use require("lspconfig.util").root_pattern(...) if needed
+	local root = vim.fn.getcwd()
+	vim.cmd("tabnew")
+
+	-- Use vim.api.nvim_command to run terminal safely
 	vim.cmd("lcd " .. root)
-	vim.cmd("term")
-end, { desc = "Open Terminal in Project Root" })
+	vim.cmd("terminal") -- Not deprecated
+	vim.cmd("startinsert")
+end, { desc = "Terminal (Project Root)" })
