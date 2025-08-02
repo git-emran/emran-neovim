@@ -80,3 +80,10 @@ end, { desc = "Go to next diagnostic message" })
 vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Open floating diagnostic message" })
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostics list" })
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true })
+
+-- Terminal toggle
+vim.keymap.set("n", "<leader>tt", function()
+	local root = vim.fn.getcwd() -- Or use require("lspconfig.util").root_pattern(...) if needed
+	vim.cmd("lcd " .. root)
+	vim.cmd("term")
+end, { desc = "Open Terminal in Project Root" })

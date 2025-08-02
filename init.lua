@@ -30,4 +30,5 @@ require("lazy").setup({
 	require("plugins.ts-autotag"),
 	require("plugins.conform"),
 	require("plugins.autopairs"),
+	require("plugins.srround"),
 })
