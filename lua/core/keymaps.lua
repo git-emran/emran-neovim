@@ -84,12 +84,3 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true })
 
 -- Terminal toggle
-vim.keymap.set("n", "<leader>tt", function()
-	local root = vim.fn.getcwd()
-	vim.cmd("tabnew")
-
-	-- Use vim.api.nvim_command to run terminal safely
-	vim.cmd("lcd " .. root)
-	vim.cmd("terminal") -- Not deprecated
-	vim.cmd("startinsert")
-end, { desc = "Terminal (Project Root)" })

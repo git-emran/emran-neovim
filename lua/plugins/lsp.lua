@@ -118,7 +118,7 @@ return {
 		vim.diagnostic.config({
 			float = {
 				wrap = true,
-				max_width = 80, -- Optional: prevents horizontal overflow
+				max_width = 50, -- Optional: prevents horizontal overflow
 			},
 		})
 
@@ -156,7 +156,25 @@ return {
 				},
 			},
 			html = { filetypes = { "html", "twig", "hbs" } },
-			cssls = {},
+			cssls = {
+				settings = {
+					css = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+					scss = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+					less = {
+						lint = {
+							unknownAtRules = "ignore",
+						},
+					},
+				},
+			},
 			tailwindcss = {},
 			dockerls = {},
 			sqlls = {},
