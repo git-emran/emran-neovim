@@ -1,28 +1,77 @@
 return {
-  'shaunsingh/nord.nvim',
-  lazy = false,
-  priority = 1000,
-  config = function()
-    -- Example config in lua
-    vim.g.nord_contrast = true
-    vim.g.nord_borders = false
-    vim.g.nord_disable_background = true
-    vim.g.nord_italic = false
-    vim.g.nord_uniform_diff_background = true
-    vim.g.nord_bold = false
+	"catppuccin/nvim",
+	name = "catppuccin",
+	lazy = false,
+	priority = 1000,
+	config = function()
+		-- Theme state
+		local bg_transparent = false
 
-    -- Load the colorscheme
-   vim.cmd('colorscheme nord')
+		-- Setup Catppuccin with your custom configuration
+		local function setup_catppuccin()
+			require("catppuccin").setup({
+				flavour = "auto", -- latte, frappe, macchiato, mocha
+				background = {
+					light = "latte",
+					dark = "mocha",
+				},
+				transparent_background = bg_transparent,
+				float = {
+					transparent = false,
+					solid = false,
+				},
+				show_end_of_buffer = false,
+				term_colors = false,
+				dim_inactive = {
+					enabled = false,
+					shade = "dark",
+					percentage = 0.15,
+				},
+				no_italic = false,
+				no_bold = false,
+				no_underline = false,
+				styles = {
+					comments = { "italic" },
+					conditionals = { "italic" },
+					loops = {},
+					functions = {},
+					keywords = {},
+					strings = {},
+					variables = {},
+					numbers = {},
+					booleans = {},
+					properties = {},
+					types = {},
+					operators = {},
+				},
+				color_overrides = {},
+				custom_highlights = {},
+				default_integrations = true,
+				auto_integrations = false,
+				integrations = {
+					cmp = true,
+					gitsigns = true,
+					nvimtree = true,
+					treesitter = true,
+					notify = false,
+					mini = {
+						enabled = true,
+						indentscope_color = "",
+					},
+				},
+			})
 
-    -- Toggle background transparency
-    local bg_transparent = true
+			vim.cmd.colorscheme("catppuccin")
+		end
 
-    local toggle_transparency = function()
-      bg_transparent = not bg_transparent
-      vim.g.nord_disable_background = bg_transparent
-      vim.cmd [[colorscheme nord]]
-    end
+		setup_catppuccin()
 
-    vim.keymap.set('n', '<leader>bg', toggle_transparency, { noremap = true, silent = true })
-  end,
+		-- Toggle transparency with <leader>bg
+		local function toggle_transparency()
+			bg_transparent = not bg_transparent
+			setup_catppuccin()
+		end
+
+		vim.keymap.set("n", "<leader>bg", toggle_transparency, { noremap = true, silent = true })
+	end,
 }

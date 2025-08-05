@@ -16,6 +16,7 @@ return {
 			direction = "horizontal", -- "vertical" | "float" | "tab"
 			close_on_exit = true,
 			shell = vim.o.shell,
+			dir = "cwd",
 		})
 	end,
 }
