@@ -13,10 +13,10 @@ return {
 			insert_mappings = true,
 			terminal_mappings = true,
 			persist_size = true,
-			direction = "horizontal", -- "vertical" | "float" | "tab"
+			direction = "float", -- "vertical" | "float" | "tab"
 			close_on_exit = true,
 			shell = vim.o.shell,
-			dir = "cwd",
+			dir = "git_dir",
 		})
 	end,
 }
