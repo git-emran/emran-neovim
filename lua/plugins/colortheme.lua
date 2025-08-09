@@ -5,7 +5,7 @@ return {
 	priority = 1000,
 	config = function()
 		-- Theme state
-		local bg_transparent = false
+		local bg_transparent = true
 
 		-- Setup Catppuccin with your custom configuration
 		local function setup_catppuccin()
@@ -17,7 +17,7 @@ return {
 				},
 				transparent_background = bg_transparent,
 				float = {
-					transparent = false,
+					transparent = true,
 					solid = false,
 				},
 				show_end_of_buffer = false,

@@ -32,4 +32,10 @@ require("lazy").setup({
 	require("plugins.autopairs"),
 	require("plugins.surround"),
 	require("plugins.toggle-term"),
+	require("plugins.folk-noice"),
+	require("plugins.incline"),
+	require("plugins.zenmode"),
+	require("plugins.render-markdown"),
+	require("plugins.copilot"),
+	require("plugins.folke-flash"),
 })
