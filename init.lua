@@ -24,7 +24,6 @@ require("lazy").setup({
 	require("plugins.treesitter"),
 	require("plugins.telescope"),
 	require("plugins.lsp"),
-	require("plugins.alpha"),
 	require("plugins.none-ls"),
 	require("plugins.indent-backline"),
 	require("plugins.ts-autotag"),
@@ -39,4 +38,5 @@ require("lazy").setup({
 	require("plugins.copilot"),
 	require("plugins.folke-flash"),
 	require("plugins.highlight-colors"),
+	require("plugins.snacks"),
 })
