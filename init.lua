@@ -38,4 +38,5 @@ require("lazy").setup({
 	require("plugins.render-markdown"),
 	require("plugins.copilot"),
 	require("plugins.folke-flash"),
+	require("plugins.highlight-colors"),
 })
