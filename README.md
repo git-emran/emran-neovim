@@ -1,7 +1,7 @@
 # Emran's Custom Neovim setup
 Modular | Scalable | Easy to Maintain
 
-<img width="2894" height="1542" alt="Screenshot 2025-08-05 at 12 48 49 PM" src="https://github.com/user-attachments/assets/35a04697-fa02-4ca2-8b09-79c4b170a9ba" />
+<img width="2632" height="1428" alt="Screenshot 2025-08-10 at 11 26 44 AM" src="https://github.com/user-attachments/assets/785d07e6-7960-4ab1-88d7-9a11c97d653d" />
 
 
 ## How to use
