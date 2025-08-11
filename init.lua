@@ -35,7 +35,6 @@ require("lazy").setup({
 	require("plugins.incline"),
 	require("plugins.zenmode"),
 	require("plugins.render-markdown"),
-	require("plugins.copilot"),
 	require("plugins.folke-flash"),
 	require("plugins.highlight-colors"),
 	require("plugins.snacks"),
