@@ -10,8 +10,8 @@ return {
 		-- Setup Rose Pine with your custom configuration
 		local function setup_rose_pine()
 			require("rose-pine").setup({
-				variant = "auto", -- auto, main, moon, dawn
-				dark_variant = "main", -- main, moon, dawn
+				variant = "moon", -- auto, main, moon, dawn
+				dark_variant = "", -- main, moon, dawn
 				dim_inactive_windows = false,
 				extend_background_behind_borders = true,
 
@@ -88,13 +88,5 @@ return {
 		end
 
 		setup_rose_pine()
-
-		-- Toggle transparency with <leader>bg
-		local function toggle_transparency()
-			bg_transparent = not bg_transparent
-			setup_rose_pine()
-		end
-
-		vim.keymap.set("n", "<leader>bg", toggle_transparency, { noremap = true, silent = true })
 	end,
 }
