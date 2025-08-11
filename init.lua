@@ -39,4 +39,5 @@ require("lazy").setup({
 	require("plugins.highlight-colors"),
 	require("plugins.snacks"),
 	require("plugins.trouble"),
+	require("plugins.origami"),
 })
