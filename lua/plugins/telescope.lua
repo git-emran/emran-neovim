@@ -22,6 +22,7 @@ return {
 			function()
 				local builtin = require("telescope.builtin")
 				builtin.find_files({
+					path = "cwd",
 					no_ignore = false,
 					hidden = true,
 				})
