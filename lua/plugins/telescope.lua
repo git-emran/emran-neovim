@@ -25,6 +25,7 @@ return {
 					path = "cwd",
 					no_ignore = false,
 					hidden = true,
+					find_command = { "fd", "--type", "f", "--max-depth", "5" }, --depth limit
 				})
 			end,
 			desc = "Lists files in your current working directory, respects .gitignore",
