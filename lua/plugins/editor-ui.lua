@@ -1,4 +1,5 @@
 return {
+	-- Bufferline: Tabs
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = {
@@ -59,6 +60,8 @@ return {
 			})
 		end,
 	},
+
+	-- Lua line : Status line
 	{
 		"nvim-lualine/lualine.nvim",
 		config = function()
@@ -138,6 +141,8 @@ return {
 			})
 		end,
 	},
+
+	-- Surround : Wraps codes around parenthesis and quotes
 	{
 		"kylechui/nvim-surround",
 		version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
@@ -152,6 +157,8 @@ return {
 			})
 		end,
 	},
+
+	-- Toggle-term : Opens the terminal
 	{
 		"akinsho/toggleterm.nvim",
 		version = "*",
@@ -175,14 +182,13 @@ return {
 		end,
 	},
 
+	-- Editor notifications & informations
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
 		opts = function(_, opts)
-			-- Ensure routes table exists
 			opts.routes = opts.routes or {}
 
-			-- Skip "No information available" notifications
 			table.insert(opts.routes, {
 				filter = {
 					event = "notify",
@@ -191,7 +197,6 @@ return {
 				opts = { skip = true },
 			})
 
-			-- Track focus state to conditionally modify notifications
 			local focused = true
 			vim.api.nvim_create_autocmd("FocusGained", {
 				callback = function()
@@ -204,7 +209,6 @@ return {
 				end,
 			})
 
-			-- When Neovim is unfocused, send notifications differently
 			table.insert(opts.routes, 1, {
 				filter = {
 					cond = function()
@@ -215,7 +219,6 @@ return {
 				opts = { stop = false },
 			})
 
-			-- Customize the :Noice command's message history window
 			opts.commands = {
 				all = {
 					view = "split",
@@ -224,7 +227,6 @@ return {
 				},
 			}
 
-			-- Setup markdown filetype integration with noice text markdown keys
 			vim.api.nvim_create_autocmd("FileType", {
 				pattern = "markdown",
 				callback = function(event)
@@ -234,17 +236,161 @@ return {
 				end,
 			})
 
-			-- Enable LSP documentation window border preset
 			opts.presets = opts.presets or {}
 			opts.presets.lsp_doc_border = true
 		end,
 	},
 
+	-- Markdown renderer
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
 		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
 		---@module 'render-markdown'
 		opts = {},
+	},
+
+	-- Code indent
+
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {
+			indent = {
+				char = "▏",
+			},
+			scope = {
+				show_start = false,
+				show_end = false,
+				show_exact_scope = false,
+			},
+			exclude = {
+				filetypes = {
+					"help",
+					"startify",
+					"dashboard",
+					"packer",
+					"neogitstatus",
+					"NvimTree",
+					"Trouble",
+				},
+			},
+		},
+	},
+
+	-- Quick search text in current buffer with s and S
+	{
+		"folke/flash.nvim",
+		event = "VeryLazy",
+		opts = {},
+		keys = {
+			{
+				"s",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").jump()
+				end,
+				desc = "Flash",
+			},
+			{
+				"S",
+				mode = { "n", "x", "o" },
+				function()
+					require("flash").treesitter()
+				end,
+				desc = "Flash Treesitter",
+			},
+			{
+				"r",
+				mode = "o",
+				function()
+					require("flash").remote()
+				end,
+				desc = "Remote Flash",
+			},
+			{
+				"R",
+				mode = { "o", "x" },
+				function()
+					require("flash").treesitter_search()
+				end,
+				desc = "Treesitter Search",
+			},
+			{
+				"<c-s>",
+				mode = { "c" },
+				function()
+					require("flash").toggle()
+				end,
+				desc = "Toggle Flash Search",
+			},
+		},
+	},
+
+	-- Zen mode
+	{
+		"folke/zen-mode.nvim",
+		cmd = "ZenMode",
+		opts = {
+			plugins = {
+				gitsigns = true,
+				tmux = true,
+				kitty = { enabled = false, font = "+2" },
+			},
+		},
+		keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
+	},
+
+	-- Adds git related signs to the gutter, as well as utilities for managing changes
+	{
+		"lewis6991/gitsigns.nvim",
+		opts = {
+			signs = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+			},
+			signs_staged = {
+				add = { text = "+" },
+				change = { text = "~" },
+				delete = { text = "_" },
+				topdelete = { text = "‾" },
+				changedelete = { text = "~" },
+			},
+		},
+	},
+
+	-- Floating File name
+	{
+		"b0o/incline.nvim",
+		dependencies = { "craftzdog/solarized-osaka.nvim" },
+		event = "BufReadPre",
+		priority = 1200,
+		config = function()
+			local colors = require("solarized-osaka.colors").setup()
+			require("incline").setup({
+				highlight = {
+					groups = {
+						InclineNormal = { guibg = colors.magenta500, guifg = colors.base04 },
+						InclineNormalNC = { guifg = colors.violet500, guibg = colors.base03 },
+					},
+				},
+				window = { margin = { vertical = 0, horizontal = 1 } },
+				hide = {
+					cursorline = true,
+				},
+				render = function(props)
+					local filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(props.buf), ":t")
+					if vim.bo[props.buf].modified then
+						filename = "[+] " .. filename
+					end
+
+					local icon, color = require("nvim-web-devicons").get_icon_color(filename)
+					return { { icon, guifg = color }, { " " }, { filename } }
+				end,
+			})
+		end,
 	},
 }
