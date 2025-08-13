@@ -14,6 +14,7 @@ return { -- Highlight, edit, and navigate code
 			"regex",
 			"terraform",
 			"sql",
+			"rust",
 			"dockerfile",
 			"toml",
 			"json",
