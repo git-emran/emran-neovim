@@ -16,7 +16,6 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require("lazy").setup({
-	require("plugins.incline"),
 	require("plugins.editor-ui"),
 	require("plugins.colortheme"),
 	require("plugins.color-highlight"),
