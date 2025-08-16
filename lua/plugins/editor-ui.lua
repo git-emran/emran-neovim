@@ -131,6 +131,13 @@ return {
 				shell = vim.o.shell,
 				dir = "git_dir",
 			})
+			-- Lazygit integration
+			local Terminal = require("toggleterm.terminal").Terminal
+			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+
+			vim.keymap.set("n", "<leader>gg", function()
+				lazygit:toggle()
+			end, { desc = "Open LazyGit" })
 		end,
 	},
 

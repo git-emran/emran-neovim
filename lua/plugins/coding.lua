@@ -174,7 +174,21 @@ return {
 			})
 		end,
 	},
-	-- Prettier
+
+	-- Git view
+
+	{
+		"dinhhuy258/git.nvim",
+		event = "BufReadPre",
+		opts = {
+			keymaps = {
+				-- Open blame window
+				blame = "<Leader>gb",
+				-- Open file/folder in git repository
+				browse = "<Leader>go",
+			},
+		},
+	},
 
 	-- Autopair tags and braces
 	{
@@ -234,6 +248,7 @@ return {
 			local null_ls = require("null-ls")
 			local formatting = null_ls.builtins.formatting -- to setup formatters
 			local diagnostics = null_ls.builtins.diagnostics -- to setup linters
+			local code_actions = null_ls.builtins.code_actions -- to setup code actions
 
 			-- Formatters & linters for mason to install
 			require("mason-null-ls").setup({
@@ -242,6 +257,12 @@ return {
 					"eslint_d", -- ts/js linter
 					"shfmt", -- Shell formatter
 					"checkmake", -- linter for Makefiles
+					-- Go tools
+					"gofmt", -- Go formatter (or use goimports for imports handling)
+					"goimports", -- Go formatter with import management
+					"golangci-lint", -- Go linter (comprehensive)
+					"gomodifytags", -- Go struct tag modifier
+					"impl", -- Go interface implementation generator
 					-- 'stylua', -- lua formatter; Already installed via Mason
 					-- 'ruff', -- Python linter and formatter; Already installed via Mason
 				},
@@ -249,6 +270,7 @@ return {
 			})
 
 			local sources = {
+				-- General
 				diagnostics.checkmake,
 				formatting.prettier.with({ filetypes = { "html", "json", "yaml", "markdown" } }),
 				formatting.stylua,
@@ -256,6 +278,13 @@ return {
 				formatting.terraform_fmt,
 				require("none-ls.formatting.ruff").with({ extra_args = { "--extend-select", "I" } }),
 				require("none-ls.formatting.ruff_format"),
+
+				-- Go support
+				formatting.goimports, -- Use goimports instead of gofmt for better import handling
+				-- Alternative: formatting.gofmt, -- Basic Go formatting
+				diagnostics.golangci_lint, -- Comprehensive Go linting
+				code_actions.gomodifytags, -- Add/remove struct tags
+				code_actions.impl, -- Generate interface implementations
 			}
 
 			local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
@@ -275,6 +304,32 @@ return {
 						})
 					end
 				end,
+			})
+		end,
+	},
+
+	-- Copilot supermaven
+
+	{
+		"supermaven-inc/supermaven-nvim",
+		config = function()
+			require("supermaven-nvim").setup({
+				keymaps = {
+					accept_suggestion = "<C-y>",
+					clear_suggestion = "<C-]>",
+					accept_word = "<C-j>",
+				},
+				ignore_filetypes = { cpp = true }, -- or { "cpp", }
+				color = {
+					suggestion_color = "#808080", -- Gray color
+					cterm = 244,
+				},
+			})
+
+			-- Set italic style for suggestions
+			vim.api.nvim_set_hl(0, "SupermavenSuggestion", {
+				fg = "#808080",
+				italic = true,
 			})
 		end,
 	},

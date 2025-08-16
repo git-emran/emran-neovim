@@ -88,6 +88,7 @@ return {
 			end,
 			desc = "Lists LSP incoming calls for word under the cursor",
 		},
+
 		{
 			"sf",
 			function()
