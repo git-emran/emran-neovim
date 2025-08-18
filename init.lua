@@ -3,7 +3,9 @@ require("core.keymaps")
 require("core.snippets")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
+local uv = vim.uv or vim.loop
+---@diagnostic disable-next-line: undefined-field
+if not uv.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
 	if vim.v.shell_error ~= 0 then
@@ -27,4 +29,6 @@ require("lazy").setup({
 	require("plugins.trouble"),
 	require("plugins.lualine"),
 	require("plugins.conform"),
+	require("plugins.none-ls"),
+	require("plugins.copilot-supermaven"),
 })

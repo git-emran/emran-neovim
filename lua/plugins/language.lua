@@ -126,6 +126,7 @@ return {
 					wrap = true,
 					max_width = 50, -- Optional: prevents horizontal overflow
 				},
+				update_in_insert = false,
 			})
 
 			-- LSP servers and clients are able to communicate to each other what features they support.
