@@ -94,37 +94,6 @@ return {
 		end,
 	},
 
-	-- Toggle-term : Opens the terminal
-	{
-		"akinsho/toggleterm.nvim",
-		version = "*",
-		config = function()
-			require("toggleterm").setup({
-				size = 20,
-				open_mapping = [[<C-\>]], -- Ctrl + \
-				hide_numbers = true,
-				shade_filetypes = {},
-				shade_terminals = true,
-				shading_factor = 2,
-				start_in_insert = true,
-				insert_mappings = true,
-				terminal_mappings = true,
-				persist_size = true,
-				direction = "float", -- "vertical" | "float" | "tab"
-				close_on_exit = true,
-				shell = vim.o.shell,
-				dir = "git_dir",
-			})
-			-- Lazygit integration
-			local Terminal = require("toggleterm.terminal").Terminal
-			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-
-			vim.keymap.set("n", "<leader>gg", function()
-				lazygit:toggle()
-			end, { desc = "Open LazyGit" })
-		end,
-	},
-
 	-- Code indent
 
 	{
@@ -151,76 +120,5 @@ return {
 				},
 			},
 		},
-	},
-
-	-- Quick search text in current buffer with s and S
-	{
-		"folke/flash.nvim",
-		event = "VeryLazy",
-		opts = {},
-		keys = {
-			{
-				"s",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").jump()
-				end,
-				desc = "Flash",
-			},
-			{
-				"S",
-				mode = { "n", "x", "o" },
-				function()
-					require("flash").treesitter()
-				end,
-				desc = "Flash Treesitter",
-			},
-			{
-				"r",
-				mode = "o",
-				function()
-					require("flash").remote()
-				end,
-				desc = "Remote Flash",
-			},
-			{
-				"R",
-				mode = { "o", "x" },
-				function()
-					require("flash").treesitter_search()
-				end,
-				desc = "Treesitter Search",
-			},
-			{
-				"<c-s>",
-				mode = { "c" },
-				function()
-					require("flash").toggle()
-				end,
-				desc = "Toggle Flash Search",
-			},
-		},
-	},
-
-	-- Zen mode
-	{
-		"folke/zen-mode.nvim",
-		cmd = "ZenMode",
-		opts = {
-			plugins = {
-				gitsigns = true,
-				tmux = true,
-				kitty = { enabled = false, font = "+2" },
-			},
-		},
-		keys = { { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" } },
-	},
-	-- Markdown render
-	{
-		"MeanderingProgrammer/render-markdown.nvim",
-		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-		-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-		---@module 'render-markdown'
-		opts = {},
 	},
 }

@@ -19,16 +19,22 @@ rtp:prepend(lazypath)
 
 require("lazy").setup({
 	require("plugins.editor-ui"),
+	require("plugins.treesitter"),
 	require("plugins.colortheme"),
 	require("plugins.color-highlight"),
 	require("plugins.folke-noice"),
 	require("plugins.coding"),
 	require("plugins.telescope"),
-	require("plugins.language"),
+	require("plugins.lsp"),
 	require("plugins.snacks"),
 	require("plugins.trouble"),
 	require("plugins.lualine"),
+	require("plugins.markdown-render"),
 	require("plugins.conform"),
 	require("plugins.none-ls"),
 	require("plugins.copilot-supermaven"),
+	require("plugins.cinnamon-scroll"),
+	require("plugins.zenmode"),
+	require("plugins.folke-flash"),
+	require("plugins.toggle-term"),
 })
