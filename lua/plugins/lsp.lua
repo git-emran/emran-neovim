@@ -224,10 +224,28 @@ return {
 			bashls = {},
 			dockerls = {},
 			docker_compose_language_service = {},
-			tailwindcss = {},
+			tailwindcss = {
+				filetypes = {
+					"html",
+					"css",
+					"scss",
+					"javascript",
+					"javascriptreact",
+					"typescript",
+					"typescriptreact",
+					"svelte",
+					"vue",
+				},
+			},
 			graphql = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
-			cssls = {},
+			cssls = {
+				settings = {
+					css = { lint = { unknownAtRules = "ignore" } },
+					scss = { lint = { unknownAtRules = "ignore" } },
+					less = { lint = { unknownAtRules = "ignore" } },
+				},
+			},
 			ltex = {},
 			texlab = {},
 		}
