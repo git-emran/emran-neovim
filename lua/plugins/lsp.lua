@@ -246,7 +246,13 @@ return {
 					less = { lint = { unknownAtRules = "ignore" } },
 				},
 			},
-			ltex = {},
+			ltex = {
+				settings = {
+					ltex = {
+						checkFrequency = "save",
+					},
+				},
+			},
 			texlab = {},
 		}
 

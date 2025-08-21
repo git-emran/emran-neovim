@@ -37,4 +37,5 @@ require("lazy").setup({
 	require("plugins.zenmode"),
 	require("plugins.folke-flash"),
 	require("plugins.toggle-term"),
+	require("plugins.typst"),
 })

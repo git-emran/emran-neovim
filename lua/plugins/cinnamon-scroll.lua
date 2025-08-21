@@ -6,7 +6,7 @@ return {
 		delay = 5,
 		keymaps = {
 			-- Enable/disable provided keymaps here
-			basic = false,
+			basic = true,
 			extra = false,
 		},
 	},
