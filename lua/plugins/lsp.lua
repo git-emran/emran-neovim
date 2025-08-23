@@ -17,6 +17,8 @@ return {
 		-- Useful status updates for LSP.
 		{
 			"j-hui/fidget.nvim",
+
+			--
 			opts = {
 				notification = {
 					window = {
@@ -184,6 +186,18 @@ return {
 					},
 				},
 			},
+			angularls = {
+				cmd = { "angular-language-server", "--stdio" },
+				filetypes = { "typescript", "html" },
+				root_dir = require("lspconfig.util").root_pattern("angular.json", "package.json", ".git"),
+				capabilities = capabilities,
+				init_options = {
+					-- Optional: specify TypeScript path if needed
+					tsserver_path = "typescript/lib/tsserverlibrary.js",
+					-- Helps LSP find Angular modules
+					ng_probe_locations = {},
+				},
+			},
 			pylsp = {
 				settings = {
 					pylsp = {
@@ -199,6 +213,16 @@ return {
 						},
 					},
 				},
+			},
+			clangd = {
+				cmd = { "clangd" },
+				filetypes = { "c", "cpp", "objc", "objcpp" },
+				root_dir = function(fname)
+					return require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt", ".git")(
+						fname
+					)
+				end,
+				capabilities = capabilities,
 			},
 			-- basedpyright = {
 			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
@@ -251,6 +275,13 @@ return {
 					ltex = {
 						checkFrequency = "save",
 					},
+				},
+			},
+			tinymist = {
+				cmd = { "tinymist" },
+				filetypes = { "typst" },
+				settings = {
+					formatterMode = "typstyle",
 				},
 			},
 			texlab = {},
