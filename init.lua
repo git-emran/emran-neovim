@@ -33,7 +33,6 @@ require("lazy").setup({
 	require("plugins.conform"),
 	require("plugins.none-ls"),
 	require("plugins.copilot-supermaven"),
-	require("plugins.cinnamon-scroll"),
 	require("plugins.zenmode"),
 	require("plugins.folke-flash"),
 	require("plugins.toggle-term"),

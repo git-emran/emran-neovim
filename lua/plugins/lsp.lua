@@ -30,6 +30,13 @@ return {
 
 		-- Allows extra capabilities provided by nvim-cmp
 		"hrsh7th/cmp-nvim-lsp",
+		-- Java support
+		{
+			"nvim-java/nvim-java",
+			config = function()
+				require("java").setup()
+			end,
+		},
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -285,6 +292,7 @@ return {
 				},
 			},
 			texlab = {},
+			jdtls = {},
 		}
 
 		-- Ensure the servers and tools above are installed
