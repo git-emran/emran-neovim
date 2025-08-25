@@ -223,6 +223,10 @@ return {
 				setup = false,
 				hOnlyOpensOnFirstColumn = false,
 			},
+			pauseFoldsOnSearch = true,
+			autoFold = {
+				enabled = false,
+			},
 			foldText = {
 				enabled = true,
 				padding = 3,

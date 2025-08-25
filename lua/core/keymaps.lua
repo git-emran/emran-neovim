@@ -67,9 +67,6 @@ vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
 
--- Neotree toggle
-vim.keymap.set("n", "<leader>e", ":Neotree toggle<CR>", { noremap = true, silent = true })
-
 -- Origami folding default overrides
 vim.keymap.set("n", "z", function()
 	require("origami").h()
