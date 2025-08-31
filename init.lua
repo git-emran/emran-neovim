@@ -37,4 +37,7 @@ require("lazy").setup({
 	require("plugins.folke-flash"),
 	require("plugins.toggle-term"),
 	require("plugins.typst"),
+}, {
+	auto_update = false,
+	checker = { enabled = false },
 })
