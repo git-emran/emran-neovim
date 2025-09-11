@@ -17,6 +17,7 @@ return { -- Highlight, edit, and navigate code
 			"rust",
 			"dockerfile",
 			"toml",
+			"cpp",
 			"json",
 			"java",
 			"groovy",
