@@ -2,7 +2,8 @@
 
 Modular | Scalable | Easy to Maintain
 
-<img width="2632" height="1428" alt="Screenshot 2025-08-10 at 11 26 44 AM" src="https://github.com/user-attachments/assets/785d07e6-7960-4ab1-88d7-9a11c97d653d" />
+<img width="2974" height="1674" alt="Emran Neovim Alpha" src="https://github.com/user-attachments/assets/b98d8d7d-68ef-412f-be59-02d3939c5563" />
+
 
 # Why Neovim ?
 
