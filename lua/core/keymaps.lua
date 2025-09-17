@@ -14,9 +14,6 @@ vim.keymap.set("n", "<C-s>", "<cmd> w <CR>", opts)
 -- save file without auto-formatting
 vim.keymap.set("n", "<leader>sn", "<cmd>noautocmd w <CR>", opts)
 
--- quit file
--- vim.keymap.set("n", "<C-q>", "<cmd> q <CR>", opts)
-
 -- delete single character without copying into register
 vim.keymap.set("n", "x", '"_x', opts)
 
@@ -69,14 +66,6 @@ vim.keymap.set("v", "<", "<gv", opts)
 vim.keymap.set("v", ">", ">gv", opts)
 -- Keep last yanked when pasting
 vim.keymap.set("v", "p", '"_dP', opts)
-
--- Origami folding default overrides
-vim.keymap.set("n", "z", function()
-	require("origami").h()
-end)
-vim.keymap.set("n", "q", function()
-	require("origami").l()
-end)
 
 -- Moving selection up & down
 vim.keymap.set("n", "<A-j>", ":m .+1<CR>==") -- Alt+j: Move line down
