@@ -7,7 +7,12 @@ return {
 		-- - Bridges the gap between LSP config names (e.g. "lua_ls") and actual Mason package names (e.g. "lua-language-server").
 		-- - Used here only to allow specifying language servers by their LSP name (like "lua_ls") in `ensure_installed`.
 		-- - It does not auto-configure servers — we use vim.lsp.config() + vim.lsp.enable() explicitly for full control.
-		"mason-org/mason-lspconfig.nvim",
+		{
+			"mason-org/mason-lspconfig.nvim",
+			opts = {
+				automatic_enable = true,
+			},
+		},
 		-- mason-tool-installer:
 		-- - Installs LSPs, linters, formatters, etc. by their Mason package name.
 		-- - We use it to ensure all desired tools are present.
@@ -17,26 +22,9 @@ return {
 		-- Useful status updates for LSP.
 		{
 			"j-hui/fidget.nvim",
-
-			--
-			opts = {
-				notification = {
-					window = {
-						winblend = 0, -- Background color opacity in the notification window
-					},
-				},
-			},
 		},
 
 		-- Allows extra capabilities provided by nvim-cmp
-		"hrsh7th/cmp-nvim-lsp",
-		-- Java support
-		{
-			"nvim-java/nvim-java",
-			config = function()
-				require("java").setup()
-			end,
-		},
 	},
 	config = function()
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -169,6 +157,22 @@ return {
 					},
 				},
 			},
+			pylsp = {
+				settings = {
+					pylsp = {
+						plugins = {
+							pyflakes = { enabled = false },
+							pycodestyle = { enabled = false },
+							autopep8 = { enabled = false },
+							yapf = { enabled = false },
+							mccabe = { enabled = false },
+							pylsp_mypy = { enabled = false },
+							pylsp_black = { enabled = false },
+							pylsp_isort = { enabled = false },
+						},
+					},
+				},
+			},
 			vtsls = {
 				settings = {
 					typescript = {
@@ -205,22 +209,6 @@ return {
 					ng_probe_locations = {},
 				},
 			},
-			pylsp = {
-				settings = {
-					pylsp = {
-						plugins = {
-							pyflakes = { enabled = false },
-							pycodestyle = { enabled = false },
-							autopep8 = { enabled = false },
-							yapf = { enabled = false },
-							mccabe = { enabled = false },
-							pylsp_mypy = { enabled = false },
-							pylsp_black = { enabled = false },
-							pylsp_isort = { enabled = false },
-						},
-					},
-				},
-			},
 			clangd = {
 				cmd = { "clangd" },
 				filetypes = { "c", "cpp", "objc", "objcpp" },
@@ -232,20 +220,20 @@ return {
 				capabilities = capabilities,
 			},
 			-- basedpyright = {
-			--   -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
-			--   settings = {
-			--     basedpyright = {
-			--       disableOrganizeImports = true, -- Using Ruff's import organizer
-			--       disableLanguageServices = false,
-			--       analysis = {
-			--         ignore = { '*' },                 -- Ignore all files for analysis to exclusively use Ruff for linting
-			--         typeCheckingMode = 'off',
-			--         diagnosticMode = 'openFilesOnly', -- Only analyze open files
-			--         useLibraryCodeForTypes = true,
-			--         autoImportCompletions = true,     -- whether pyright offers auto-import completions
-			--       },
-			--     },
-			--   },
+			--    -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
+			--    settings = {
+			--      basedpyright = {
+			--        disableOrganizeImports = true, -- Using Ruff's import organizer
+			--        disableLanguageServices = false,
+			--        analysis = {
+			--          ignore = { '*' },             -- Ignore all files for analysis to exclusively use Ruff for linting
+			--          typeCheckingMode = 'off',
+			--          diagnosticMode = 'openFilesOnly', -- Only analyze open files
+			--          useLibraryCodeForTypes = true,
+			--          autoImportCompletions = true,       -- whether pyright offers auto-import completions
+			--        },
+			--      },
+			--    },
 			-- },
 			ruff = {},
 			jsonls = {},
@@ -254,7 +242,6 @@ return {
 			yamlls = {},
 			bashls = {},
 			dockerls = {},
-			docker_compose_language_service = {},
 			tailwindcss = {
 				filetypes = {
 					"html",
@@ -269,7 +256,6 @@ return {
 				},
 			},
 			graphql = {},
-			html = { filetypes = { "html", "twig", "hbs" } },
 			cssls = {
 				settings = {
 					css = { lint = { unknownAtRules = "ignore" } },
@@ -293,13 +279,16 @@ return {
 			},
 			texlab = {},
 			jdtls = {},
+			docker_compose_language_service = {},
+			-- tailwindcss = {},
+			-- graphql = {},
+			html = { filetypes = { "html", "twig", "hbs" } },
 		}
 
 		-- Ensure the servers and tools above are installed
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
 			"stylua", -- Used to format Lua code
-			"typescript-language-server",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

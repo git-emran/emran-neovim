@@ -1,10 +1,12 @@
-require("core.options")
+-- Load core modules
 require("core.keymaps")
+require("core.options")
 require("core.snippets")
 
+-- Setup lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 local uv = vim.uv or vim.loop
----@diagnostic disable-next-line: undefined-field
+
 if not uv.fs_stat(lazypath) then
 	local lazyrepo = "https://github.com/folke/lazy.nvim.git"
 	local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
@@ -12,28 +14,37 @@ if not uv.fs_stat(lazypath) then
 		error("Error cloning lazy.nvim:\n" .. out)
 	end
 end
---
 
-local rtp = vim.opt.rtp
-rtp:prepend(lazypath)
+vim.opt.runtimepath:prepend(lazypath)
 
-require("lazy").setup({
-	require("plugins.editor-ui"),
-	require("plugins.treesitter"),
-	require("plugins.colortheme"),
-	require("plugins.color-highlight"),
-	require("plugins.coding"),
-	require("plugins.telescope"),
-	require("plugins.lsp"),
-	require("plugins.snacks"),
-	require("plugins.trouble"),
-	require("plugins.lualine"),
-	require("plugins.markdown-render"),
-	require("plugins.conform"),
-	require("plugins.none-ls"),
-	require("plugins.copilot-supermaven"),
-	require("plugins.zenmode"),
-	require("plugins.folke-flash"),
-	require("plugins.toggle-term"),
-	require("plugins.typst"),
-})
+-- List of plugin modules
+local plugin_modules = {
+	"plugins.lsp",
+	"plugins.lazydev",
+	"plugins.editor-ui",
+	"plugins.none-ls",
+	"plugins.treesitter",
+	"plugins.colortheme",
+	"plugins.color-highlight",
+	"plugins.coding",
+	"plugins.telescope",
+	"plugins.snacks",
+	"plugins.trouble",
+	"plugins.lualine",
+	"plugins.markdown-render",
+	"plugins.conform",
+	"plugins.copilot-supermaven",
+	"plugins.zenmode",
+	"plugins.folke-flash",
+	"plugins.toggle-term",
+	"plugins.typst",
+}
+
+-- Convert module names to require calls
+local plugins = {}
+for _, module in ipairs(plugin_modules) do
+	table.insert(plugins, require(module))
+end
+
+-- Setup lazy.nvim with plugins
+require("lazy").setup(plugins)
