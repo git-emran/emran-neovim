@@ -158,6 +158,25 @@ return {
 					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
+					{ name = "nvim_lsp_signature_help" },
+					{
+						name = "spell",
+						option = {
+							keep_all_entries = false,
+							enable_in_context = function()
+								return true
+							end,
+							preselect_correct_word = true,
+						},
+					},
+					{
+						name = "go_deep",
+						keyword_length = 3,
+						max_item_count = 5,
+						option = {
+							-- See below for configuration options
+						},
+					},
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },
