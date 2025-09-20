@@ -1,9 +1,9 @@
 return {
 	-- Bufferline: Tabs
-  {
-  "williamboman/mason.nvim",
-  opts = {}
-},
+	{
+		"williamboman/mason.nvim",
+		opts = {},
+	},
 
 	{
 		"akinsho/bufferline.nvim",
@@ -125,5 +125,13 @@ return {
 				},
 			},
 		},
+	},
+	{
+		"nvim-tree/nvim-web-devicons",
+		lazy = true, -- loads only when needed
+	},
+	{
+		"onsails/lspkind.nvim",
+		lazy = true,
 	},
 }

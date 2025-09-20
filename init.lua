@@ -1,4 +1,3 @@
--- Load core modules
 require("core.keymaps")
 require("core.options")
 require("core.snippets")
@@ -43,7 +42,7 @@ local plugin_modules = {
 -- Convert module names to require calls
 local plugins = {}
 for _, module in ipairs(plugin_modules) do
-	table.insert(plugins, require(module))
+	table.insert(plugins, { import = module })
 end
 
 -- Setup lazy.nvim with plugins
