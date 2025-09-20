@@ -14,9 +14,14 @@ return {
 	-- Blink completion source for LazyDev, Lua-only implementation
 	{
 		"saghen/blink.cmp",
+		version = "v1.*",
+		build = function()
+			vim.fn.system({ "cargo", "build", "--release" })
+		end,
 		opts = {
-			-- Force Lua fuzzy matching (no Rust, no warnings)
-			fuzzy = { implementation = "lua" },
+			-- Use Lua fuzzy matcher (no warnings).
+			-- Change to "prefer_rust" if you install Rust nightly.
+			fuzzy = { implementation = "prefer_rust" },
 
 			sources = {
 				default = { "lazydev", "lsp", "path", "snippets", "buffer" },
@@ -24,12 +29,13 @@ return {
 					lazydev = {
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
-						score_offset = 100, -- top priority
+						score_offset = 100,
 					},
 				},
 			},
 		},
 	},
+
 	{
 		"j-hui/fidget.nvim",
 		tag = "v1.6.1",
