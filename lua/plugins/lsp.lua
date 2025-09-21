@@ -9,9 +9,7 @@ return {
 		-- - It does not auto-configure servers — we use vim.lsp.config() + vim.lsp.enable() explicitly for full control.
 		{
 			"mason-org/mason-lspconfig.nvim",
-			opts = {
-				automatic_enable = true,
-			},
+			opts = {},
 		},
 		-- mason-tool-installer:
 		-- - Installs LSPs, linters, formatters, etc. by their Mason package name.
@@ -22,6 +20,7 @@ return {
 		-- Useful status updates for LSP.
 		{
 			"j-hui/fidget.nvim",
+			opts = {},
 		},
 
 		-- Allows extra capabilities provided by nvim-cmp
@@ -48,17 +47,29 @@ return {
 						completion = {
 							callSnippet = "Replace",
 						},
-						runtime = { version = "LuaJIT" },
+						runtime = {
+							version = "LuaJIT",
+							path = vim.split(package.path, ";"),
+						},
 						workspace = {
 							checkThirdParty = false,
-							library = vim.api.nvim_get_runtime_file("", true),
+							library = {
+								vim.env.VIMRUNTIME,
+								-- Add the current config directory to workspace
+								vim.fn.stdpath("config") .. "/lua",
+							},
+							maxPreload = 100000,
+							preloadFileSize = 10000,
 						},
 						diagnostics = {
-							globals = { "vim" },
-							disable = { "missing-fields" },
+							globals = { "vim", "use" }, -- Add commonly used globals
+							disable = { "missing-fields", "incomplete-signature-doc" },
 						},
 						format = {
-							enable = false,
+							enable = false, -- We're using stylua for formatting
+						},
+						telemetry = {
+							enable = false, -- Disable telemetry
 						},
 					},
 				},
@@ -80,51 +91,103 @@ return {
 				},
 			},
 			vtsls = {
+				filetypes = {
+					"javascript",
+					"javascriptreact",
+					"javascript.jsx",
+					"typescript",
+					"typescriptreact",
+					"typescript.tsx",
+				},
 				settings = {
+					complete_function_calls = true,
+					vtsls = {
+						enableMoveToFileCodeAction = true,
+						autoUseWorkspaceTsdk = true,
+						experimental = {
+							completion = {
+								enableServerSideFuzzyMatch = true,
+							},
+						},
+					},
 					typescript = {
+						updateImportsOnFileMove = { enabled = "always" },
+						suggest = {
+							completeFunctionCalls = true,
+						},
 						inlayHints = {
+							enumMemberValues = { enabled = true },
+							functionLikeReturnTypes = { enabled = true },
 							parameterNames = { enabled = "literals" },
 							parameterTypes = { enabled = true },
-							variableTypes = { enabled = true },
 							propertyDeclarationTypes = { enabled = true },
-							functionLikeReturnTypes = { enabled = true },
-							enumMemberValues = { enabled = true },
+							variableTypes = { enabled = false },
 						},
 					},
 					javascript = {
+						updateImportsOnFileMove = { enabled = "always" },
+						suggest = {
+							completeFunctionCalls = true,
+						},
 						inlayHints = {
+							enumMemberValues = { enabled = true },
+							functionLikeReturnTypes = { enabled = true },
 							parameterNames = { enabled = "literals" },
 							parameterTypes = { enabled = true },
-							variableTypes = { enabled = true },
 							propertyDeclarationTypes = { enabled = true },
-							functionLikeReturnTypes = { enabled = true },
-							enumMemberValues = { enabled = true },
+							variableTypes = { enabled = false },
 						},
 					},
 				},
 			},
 			angularls = {
-				cmd = { "angular-language-server", "--stdio" },
-				filetypes = { "typescript", "html" },
-				root_dir = require("lspconfig.util").root_pattern("angular.json", "package.json", ".git"),
-				capabilities = capabilities,
-				init_options = {
-					-- Optional: specify TypeScript path if needed
-					tsserver_path = "typescript/lib/tsserverlibrary.js",
-					-- Helps LSP find Angular modules
-					ng_probe_locations = {},
-				},
+				cmd = { "ngserver", "--stdio", "--tsProbeLocations", "", "--ngProbeLocations", "" },
+				filetypes = { "typescript", "html", "typescriptreact", "typescript.tsx" },
+				root_dir = function(fname)
+					-- Look upward for one of these files
+					return vim.fs.root(fname, { "angular.json", "project.json", ".git" })
+				end,
+				on_new_config = function(new_config, new_root_dir)
+					new_config.cmd = {
+						"ngserver",
+						"--stdio",
+						"--tsProbeLocations",
+						new_root_dir,
+						"--ngProbeLocations",
+						new_root_dir,
+					}
+				end,
 			},
 			clangd = {
-				cmd = { "clangd" },
-				filetypes = { "c", "cpp", "objc", "objcpp" },
+				cmd = {
+					"clangd",
+					"--background-index",
+					"--clang-tidy",
+					"--header-insertion=iwyu",
+					"--completion-style=detailed",
+					"--function-arg-placeholders",
+					"--fallback-style=llvm",
+				},
+				filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
 				root_dir = function(fname)
-					return require("lspconfig.util").root_pattern("compile_commands.json", "compile_flags.txt", ".git")(
-						fname
-					)
+					-- Search upward for one of these files
+					return vim.fs.root(fname, {
+						".clangd",
+						".clang-tidy",
+						".clang-format",
+						"compile_commands.json",
+						"compile_flags.txt",
+						"configure.ac",
+						".git",
+					})
 				end,
-				capabilities = capabilities,
+				init_options = {
+					usePlaceholders = true,
+					completeUnimported = true,
+					clangdFileStatus = true,
+				},
 			},
+
 			-- basedpyright = {
 			--    -- Config options: https://github.com/DetachHead/basedpyright/blob/main/docs/settings.md
 			--    settings = {
@@ -186,26 +249,35 @@ return {
 			texlab = {},
 			jdtls = {},
 			docker_compose_language_service = {},
-			-- tailwindcss = {},
-			-- graphql = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
 		}
 
-		-- Ensure the servers and tools above are installed
-		local ensure_installed = vim.tbl_keys(servers or {})
-		vim.list_extend(ensure_installed, {
-			"stylua", -- Used to format Lua code
+		-- Separate LSP servers from tools for Mason
+		local lsp_servers = vim.tbl_keys(servers or {})
+		local mason_tools = {
+			"stylua", -- Used to format Lua code (this is a formatter, not an LSP)
+		}
+
+		-- Install LSP servers and tools separately
+		require("mason-tool-installer").setup({
+			ensure_installed = vim.list_extend(vim.deepcopy(lsp_servers), mason_tools),
+			auto_update = false,
+			run_on_start = true,
 		})
-		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+		-- Configure and enable each LSP server
 		for server, cfg in pairs(servers) do
-			-- For each LSP server (cfg), we merge:
-			-- 1. A fresh empty table (to avoid mutating capabilities globally)
-			-- 2. Your capabilities object with Neovim + cmp features
-			-- 3. Any server-specific cfg.capabilities if defined in `servers`
-			cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+			-- Create a deep copy of the config to avoid mutating the original
+			local server_config = vim.deepcopy(cfg)
 
-			vim.lsp.config(server, cfg)
+			-- Add capabilities to the config copy
+			server_config.capabilities =
+				vim.tbl_deep_extend("force", {}, capabilities, server_config.capabilities or {})
+
+			-- Configure the server (this registers the configuration)
+			vim.lsp.config(server, server_config)
+
+			-- Enable the server (this starts it when appropriate)
 			vim.lsp.enable(server)
 		end
 	end,

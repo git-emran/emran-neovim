@@ -34,6 +34,11 @@ return { -- Highlight, edit, and navigate code
 			"css",
 			"html",
 			"zig",
+			"vue",
+			"latex",
+			"svelte",
+			"scss",
+			"norg",
 		},
 		-- Autoinstall languages that are not installed
 		auto_install = true,
