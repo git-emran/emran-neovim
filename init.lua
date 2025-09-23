@@ -26,6 +26,7 @@ local plugin_modules = {
 	"plugins.colortheme",
 	"plugins.color-highlight",
 	"plugins.coding",
+	"plugins.debug",
 	"plugins.telescope",
 	"plugins.snacks",
 	"plugins.trouble",

@@ -35,6 +35,7 @@ vim.o.breakindent = true -- Enable break indent (default: false)
 vim.o.updatetime = 250 -- Decrease update time (default: 4000)
 vim.o.timeoutlen = 500 -- Time to wait for a mapped sequence to complete (in milliseconds) (default: 1000)
 vim.o.backup = false -- Creates a backup file (default: false)
+vim.o.backupcopy = "yes"
 vim.o.writebackup = false -- If a file is being edited by another program (or was written to file while editing with another program), it is not allowed to be edited (default: true)
 vim.o.undofile = true -- Save undo history (default: false)
 vim.o.completeopt = "menuone,noselect" -- Set completeopt to have a better completion experience (default: 'menu,preview')
