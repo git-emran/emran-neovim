@@ -15,7 +15,7 @@ return {
 		-- - Installs LSPs, linters, formatters, etc. by their Mason package name.
 		-- - We use it to ensure all desired tools are present.
 		-- - The `ensure_installed` list works with mason-lspconfig to resolve LSP names like "lua_ls".
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
 		-- Useful status updates for LSP.
 		{
@@ -272,7 +272,6 @@ return {
 				},
 			},
 			texlab = {},
-			jdtls = {},
 			docker_compose_language_service = {},
 			html = { filetypes = { "html", "twig", "hbs" } },
 		}
