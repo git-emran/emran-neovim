@@ -78,28 +78,14 @@ return {
 				settings = {
 					pylsp = {
 						plugins = {
-							ruff = {
-								enabled = true, -- Enable the plugin
-								formatEnabled = true, -- Enable formatting using ruffs formatter
-								executable = "<path-to-ruff-bin>", -- Custom path to ruff
-								config = "<path_to_custom_ruff_toml>", -- Custom config for ruff to use
-								extendSelect = { "I" }, -- Rules that are additionally used by ruff
-								lineLength = 88, -- Line length to pass to ruff checking and formatting
-								exclude = { "__about__.py" }, -- Files to be excluded by ruff checking
-								select = { "F" }, -- Rules to be enabled by ruff
-								ignore = { "D210" }, -- Rules to be ignored by ruff
-								perFileIgnores = { ["__init__.py"] = "CPY001" }, -- Rules that should be ignored for specific files
-								preview = false, -- Whether to enable the preview style linting and formatting.
-								targetVersion = "py310", -- The minimum python version to target (applies for both linting and formatting).
+							pycodestyle = {
+
+								ignore = { "W391" },
+								maxLineLength = 100,
 							},
-							pyflakes = { enabled = false },
-							pycodestyle = { enabled = false },
-							autopep8 = { enabled = false },
-							yapf = { enabled = false },
-							mccabe = { enabled = false },
-							pylsp_mypy = { enabled = false },
-							pylsp_black = { enabled = false },
-							pylsp_isort = { enabled = false },
+							pydocstyle = {
+								enabled = { false },
+							},
 						},
 					},
 				},

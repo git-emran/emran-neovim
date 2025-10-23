@@ -12,11 +12,17 @@ return {
 				typescriptreact = { "prettier", name = "dprint", timeout_ms = 500, lsp_format = "fallback" },
 				rust = { name = "rust_analyzer", timeout_ms = 500, lsp_format = "prefer" },
 				html = { "prettier" },
+				python = function(bufnr)
+					if require("conform").get_formatter_info("ruff_format", bufnr).available then
+						return { "ruff_format" }
+					else
+						return { "isort", "black" }
+					end
+				end,
 				css = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
 				markdown = { "prettier" },
-				python = { "ruff_format" },
 				go = { name = "gopls", timeout_ms = 500, lsp_format = "prefer" },
 				sh = { "shfmt" },
 				-- add more filetypes here
