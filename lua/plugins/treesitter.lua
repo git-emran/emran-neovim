@@ -4,6 +4,29 @@ return { -- Highlight, edit, and navigate code
 	main = "nvim-treesitter.configs", -- Sets main module to use for opts
 	-- [[ Configure Treesitter ]] See `:help nvim-treesitter`
 	opts = {
+		inlay_hints = {
+			inline = false,
+		},
+		ast = {
+			--These require codicons (https://github.com/microsoft/vscode-codicons)
+			role_icons = {
+				type = "",
+				declaration = "",
+				expression = "",
+				specifier = "",
+				statement = "",
+				["template argument"] = "",
+			},
+			kind_icons = {
+				Compound = "",
+				Recovery = "",
+				TranslationUnit = "",
+				PackExpansion = "",
+				TemplateTypeParm = "",
+				TemplateTemplateParm = "",
+				TemplateParamObject = "",
+			},
+		},
 		ensure_installed = {
 			"lua",
 			"python",

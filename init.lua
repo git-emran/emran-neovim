@@ -1,6 +1,7 @@
 require("core.keymaps")
 require("core.options")
 require("core.snippets")
+require("core.filetypes")
 
 -- Setup lazy.nvim if not installed
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -38,6 +39,7 @@ local plugin_modules = {
 	"plugins.folke-flash",
 	"plugins.toggle-term",
 	"plugins.typst",
+	"plugins.jdtls",
 }
 
 -- Convert module names to require calls
