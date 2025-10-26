@@ -174,6 +174,9 @@ return {
 					{ "<leader>ch", "<cmd>LspClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
 				},
 				root_markers = {
+					".clangd",
+					".clang-tidy",
+					"clang-format",
 					"compile_commands.json",
 					"compile_flags.txt",
 					"configure.ac", -- AutoTools
@@ -198,7 +201,7 @@ return {
 					"--function-arg-placeholders",
 					"--fallback-style=llvm",
 				},
-				filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+				filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
 				root_dir = function(fname)
 					-- Search upward for one of these files
 					return vim.fs.root(fname, {
@@ -234,7 +237,17 @@ return {
 			--      },
 			--    },
 			-- },
-			ruff = {},
+			ruff = {
+				filetypes = {
+					"python",
+				},
+				root_markers = {
+					"pyproject.toml",
+					"ruff.toml",
+					".ruff.toml",
+					".git",
+				},
+			},
 			jsonls = {},
 			sqlls = {},
 			terraformls = {},

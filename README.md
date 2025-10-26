@@ -4,8 +4,7 @@ Modular | Scalable | Easy to Maintain
 
 <img width="2974" height="1674" alt="Emran Neovim Alpha" src="https://github.com/user-attachments/assets/b98d8d7d-68ef-412f-be59-02d3939c5563" />
 
-
-# Why Neovim ?
+# Why vim ?
 
 It is an improvement of `vi` editor from the 1970's. It is a text editor. Vim has been around for a long time. It makes you productive, efficient and it is BLAZINGLY fast. Works over remote ssh without needing a GUI. Vim has a rock solid stability that will surpass your expectation by a long shot. Instead of “where’s my cursor and how do I drag-select this?” you start thinking:
 
