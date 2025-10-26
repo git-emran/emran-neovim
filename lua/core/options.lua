@@ -28,6 +28,7 @@ vim.o.backspace = "indent,eol,start" -- Allow backspace on (default: 'indent,eol
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)
 vim.o.conceallevel = 0 -- So that `` is visible in markdown files (default: 1)
 vim.o.signcolumn = "yes" -- Keep signcolumn on by default (default: 'auto')
+
 vim.o.fileencoding = "utf-8" -- The encoding written to a file (default: 'utf-8')
 vim.o.cmdheight = 1 -- More space in the Neovim command line for displaying messages (default: 1)
 vim.o.breakindent = true -- Enable break indent (default: false)
