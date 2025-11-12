@@ -17,36 +17,26 @@ end
 
 vim.opt.runtimepath:prepend(lazypath)
 
--- List of plugin modules
-local plugin_modules = {
-	"plugins.lsp",
-	"plugins.lazydev",
-	"plugins.editor-ui",
-	"plugins.none-ls",
-	"plugins.treesitter",
-	"plugins.colortheme",
-	"plugins.color-highlight",
-	"plugins.coding",
-	"plugins.debug",
-	"plugins.telescope",
-	"plugins.snacks",
-	"plugins.trouble",
-	"plugins.lualine",
-	"plugins.markdown-render",
-	"plugins.conform",
-	"plugins.copilot-supermaven",
-	"plugins.zenmode",
-	"plugins.folke-flash",
-	"plugins.toggle-term",
-	"plugins.typst",
-	"plugins.jdtls",
-}
-
--- Convert module names to require calls
-local plugins = {}
-for _, module in ipairs(plugin_modules) do
-	table.insert(plugins, { import = module })
-end
-
--- Setup lazy.nvim with plugins
-require("lazy").setup(plugins)
+require("lazy").setup({
+	require("plugins.lsp"),
+	require("plugins.lazydev"),
+	require("plugins.coding"),
+	require("plugins.editor-ui"),
+	require("plugins.none-ls"),
+	require("plugins.treesitter"),
+	require("plugins.colortheme"),
+	require("plugins.color-highlight"),
+	require("plugins.debug"),
+	require("plugins.telescope"),
+	require("plugins.snacks"),
+	require("plugins.trouble"),
+	require("plugins.lualine"),
+	require("plugins.markdown-render"),
+	require("plugins.conform"),
+	require("plugins.copilot-supermaven"),
+	require("plugins.zenmode"),
+	require("plugins.folke-flash"),
+	require("plugins.toggle-term"),
+	require("plugins.typst"),
+	require("plugins.jdtls"),
+})
