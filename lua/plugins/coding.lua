@@ -194,7 +194,7 @@ return {
 			})
 		end,
 	},
-	-- Surrounds the code in surround the word in parenthesis
+	-- Surrounds code/word in parenthesis
 	{
 		"kylechui/nvim-surround",
 		version = "^3.0.0", -- Use for stability; omit to use `main` branch for the latest features
