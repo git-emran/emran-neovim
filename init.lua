@@ -39,4 +39,5 @@ require("lazy").setup({
 	require("plugins.toggle-term"),
 	require("plugins.typst"),
 	require("plugins.jdtls"),
+	require("plugins.roslyn"),
 })
