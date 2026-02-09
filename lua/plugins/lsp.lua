@@ -279,6 +279,7 @@ return {
 			ltex = {
 				settings = {
 					ltex = {
+						language = "en-GB",
 						checkFrequency = "save",
 					},
 				},
@@ -333,6 +334,10 @@ return {
 
 			-- Configure the server (this registers the configuration)
 			vim.lsp.config(server, server_config)
+
+			vim.diagnostic.config({
+				update_in_insert = false,
+			})
 
 			-- Enable the server (this starts it when appropriate)
 			vim.lsp.enable(server)
