@@ -9,7 +9,10 @@ return {
 		-- - It does not auto-configure servers — we use vim.lsp.config() + vim.lsp.enable() explicitly for full control.
 		{
 			"mason-org/mason-lspconfig.nvim",
-			opts = {},
+			opts = {
+				handlers = {},
+				auto_update = false,
+			},
 		},
 		-- mason-tool-installer:
 		-- - Installs LSPs, linters, formatters, etc. by their Mason package name.
@@ -25,6 +28,9 @@ return {
 
 		-- Allows extra capabilities provided by nvim-cmp
 	},
+	vim.diagnostic.config({
+		update_in_insert = false,
+	}),
 	config = function()
 		-- LSP servers and clients are able to communicate to each other what features they support.
 		-- By default, Neovim doesn't support everything that is in the LSP specification.
@@ -257,9 +263,6 @@ return {
 			dockerls = {},
 			tailwindcss = {
 				filetypes = {
-					"html",
-					"css",
-					"scss",
 					"javascript",
 					"javascriptreact",
 					"typescript",
@@ -277,10 +280,18 @@ return {
 				},
 			},
 			ltex = {
+				filetypes = { "markdown", "tex", "bib" },
+				flags = {
+					debounce_text_changes = 500, -- Essential: prevents checking every keystroke
+				},
 				settings = {
 					ltex = {
-						language = "en-GB",
-						checkFrequency = "save",
+						enabled = {
+							"markdown",
+							"tex",
+							"bib",
+						},
+						checkOnSave = true,
 					},
 				},
 			},
@@ -334,10 +345,6 @@ return {
 
 			-- Configure the server (this registers the configuration)
 			vim.lsp.config(server, server_config)
-
-			vim.diagnostic.config({
-				update_in_insert = false,
-			})
 
 			-- Enable the server (this starts it when appropriate)
 			vim.lsp.enable(server)
