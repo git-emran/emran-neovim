@@ -19,7 +19,16 @@ return {
 		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
 
 		-- LSP status
-		{ "j-hui/fidget.nvim", opts = {} },
+		{
+			"j-hui/fidget.nvim",
+			opts = {
+				notification = {
+					window = {
+						winblend = 0,
+					},
+				},
+			},
+		},
 
 		-- Capabilities
 		"hrsh7th/cmp-nvim-lsp",
