@@ -1,0 +1,2 @@
+-- lsp/yamlls.lua
+return {}

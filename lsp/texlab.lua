@@ -1,0 +1,2 @@
+-- lsp/texlab.lua
+return {}

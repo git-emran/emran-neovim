@@ -1,0 +1,2 @@
+-- lsp/terraformls.lua
+return {}

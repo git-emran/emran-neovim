@@ -1,0 +1,2 @@
+-- lsp/sqlls.lua
+return {}

@@ -43,7 +43,7 @@ return {
 			}
 
 			-- Use the modern, recommended API to configure and enable the server
-			vim.lsp.config("tinymist", tinymist_config)
+			vim.lsp.config["tinymist"] = tinymist_config
 			vim.lsp.enable("tinymist")
 		end,
 	},

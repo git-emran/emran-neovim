@@ -1,0 +1,2 @@
+-- lsp/bashls.lua
+return {}

@@ -49,255 +49,38 @@ return {
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 		--------------------------------------------------------------------
-		-- LSP SERVER DEFINITIONS
+		-- LOAD SERVERS FROM lsp/*.lua
 		--------------------------------------------------------------------
-		-- Each table here should ONLY describe the server.
-		-- No Mason logic. No enable/start logic.
-		local servers = {
+		-- We scan ~/.config/nvim/lsp/*.lua and load each file.
+		-- Each file returns a config table valid for vim.lsp.config[name].
+		local lsp_plugins_path = vim.fn.stdpath("config") .. "/lsp"
+		local handle = vim.loop.fs_scandir(lsp_plugins_path)
 
-			----------------------------------------------------------------
-			-- Lua
-			----------------------------------------------------------------
-			lua_ls = {
-				settings = {
-					Lua = {
-						completion = { callSnippet = "Replace" },
-						runtime = {
-							version = "LuaJIT",
-							path = vim.split(package.path, ";"),
-						},
-						workspace = {
-							checkThirdParty = false,
-							library = {
-								vim.env.VIMRUNTIME,
-								vim.fn.stdpath("config") .. "/lua",
-							},
-							maxPreload = 100000,
-							preloadFileSize = 10000,
-						},
-						diagnostics = {
-							globals = { "vim", "use" },
-							disable = {
-								"missing-fields",
-								"incomplete-signature-doc",
-							},
-						},
-						format = { enable = false },
-						telemetry = { enable = false },
-					},
-				},
-			},
+		local servers = {}
 
-			----------------------------------------------------------------
-			-- Python
-			----------------------------------------------------------------
-			pylsp = {
-				settings = {
-					pylsp = {
-						plugins = {
-							pycodestyle = {
-								ignore = { "W391" },
-								maxLineLength = 100,
-							},
-							pydocstyle = {
-								enabled = false,
-							},
-						},
-					},
-				},
-			},
+		if handle then
+			while true do
+				local name, type = vim.loop.fs_scandir_next(handle)
+				if not name then
+					break
+				end
 
-			ruff = {
-				filetypes = { "python" },
-				root_markers = {
-					"pyproject.toml",
-					"ruff.toml",
-					".ruff.toml",
-					".git",
-				},
-			},
-
-			----------------------------------------------------------------
-			-- TypeScript / JavaScript
-			----------------------------------------------------------------
-			vtsls = {
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"javascript.jsx",
-					"typescript",
-					"typescriptreact",
-					"typescript.tsx",
-				},
-				settings = {
-					complete_function_calls = true,
-					vtsls = {
-						enableMoveToFileCodeAction = true,
-						autoUseWorkspaceTsdk = true,
-						experimental = {
-							completion = {
-								enableServerSideFuzzyMatch = true,
-							},
-						},
-					},
-					typescript = {
-						updateImportsOnFileMove = { enabled = "always" },
-						suggest = { completeFunctionCalls = true },
-						inlayHints = {
-							enumMemberValues = { enabled = true },
-							functionLikeReturnTypes = { enabled = true },
-							parameterNames = { enabled = "literals" },
-							parameterTypes = { enabled = true },
-							propertyDeclarationTypes = { enabled = true },
-							variableTypes = { enabled = false },
-						},
-					},
-					javascript = {
-						updateImportsOnFileMove = { enabled = "always" },
-						suggest = { completeFunctionCalls = true },
-						inlayHints = {
-							enumMemberValues = { enabled = true },
-							functionLikeReturnTypes = { enabled = true },
-							parameterNames = { enabled = "literals" },
-							parameterTypes = { enabled = true },
-							propertyDeclarationTypes = { enabled = true },
-							variableTypes = { enabled = false },
-						},
-					},
-				},
-			},
-
-			tailwindcss = {
-				filetypes = {
-					"javascript",
-					"javascriptreact",
-					"typescript",
-					"typescriptreact",
-					"svelte",
-					"vue",
-				},
-			},
-
-			----------------------------------------------------------------
-			-- Rust
-			----------------------------------------------------------------
-			rust_analyzer = {
-				settings = {
-					["rust-analyzer"] = {
-						cargo = { allFeatures = true },
-						checkOnSave = { command = "clippy" },
-						inlayHints = { locationLinks = false },
-					},
-				},
-			},
-
-			----------------------------------------------------------------
-			-- C / C++
-			----------------------------------------------------------------
-			clangd = {
-				capabilities = {
-					offsetEncoding = { "utf-16" },
-				},
-				cmd = {
-					"clangd",
-					"--background-index",
-					"--clang-tidy",
-					"--header-insertion=iwyu",
-					"--completion-style=detailed",
-					"--function-arg-placeholders",
-					"--fallback-style=llvm",
-				},
-				filetypes = { "c", "cpp", "objc", "objcpp", "cuda" },
-				root_dir = function(fname)
-					return vim.fs.root(fname, {
-						".clangd",
-						".clang-tidy",
-						".clang-format",
-						"compile_commands.json",
-						"compile_flags.txt",
-						"configure.ac",
-						".git",
-					})
-				end,
-				init_options = {
-					usePlaceholders = true,
-					completeUnimported = true,
-					clangdFileStatus = true,
-				},
-			},
-
-			----------------------------------------------------------------
-			-- Web / Markup / Infra
-			----------------------------------------------------------------
-			html = { filetypes = { "html", "twig", "hbs" } },
-			cssls = {
-				settings = {
-					css = { lint = { unknownAtRules = "ignore" } },
-					scss = { lint = { unknownAtRules = "ignore" } },
-					less = { lint = { unknownAtRules = "ignore" } },
-				},
-			},
-
-			jsonls = {},
-			yamlls = {},
-			bashls = {},
-			dockerls = {},
-			docker_compose_language_service = {},
-			terraformls = {},
-			sqlls = {},
-			graphql = {},
-
-			----------------------------------------------------------------
-			-- Writing / Docs
-			----------------------------------------------------------------
-			ltex = {
-				filetypes = { "markdown", "tex", "bib" },
-				flags = { debounce_text_changes = 500 },
-				settings = {
-					ltex = {
-						enabled = { "markdown", "tex", "bib" },
-						checkOnSave = true,
-					},
-				},
-			},
-
-			texlab = {},
-			tinymist = {
-				filetypes = { "typst" },
-				settings = {
-					formatterMode = "typstyle",
-				},
-			},
-
-			----------------------------------------------------------------
-			-- C#
-			----------------------------------------------------------------
-			roslyn = {
-				settings = {
-					["csharp|inlay_hints"] = {
-						csharp_enable_inlay_hints_for_implicit_object_creation = true,
-						csharp_enable_inlay_hints_for_implicit_variable_types = true,
-						csharp_enable_inlay_hints_for_types = true,
-						dotnet_enable_inlay_hints_for_object_creation_parameters = true,
-					},
-					["csharp|code_lens"] = {
-						dotnet_enable_references_code_lens = true,
-					},
-				},
-			},
-		}
+				if type == "file" and name:match("%.lua$") then
+					local server_name = name:gsub("%.lua$", "")
+					table.insert(servers, server_name)
+				end
+			end
+		end
 
 		--------------------------------------------------------------------
 		-- MASON INSTALLATION
 		--------------------------------------------------------------------
-		local lsp_servers = vim.tbl_keys(servers)
-
 		local mason_tools = {
 			"stylua",
 		}
 
 		require("mason-tool-installer").setup({
-			ensure_installed = vim.list_extend(vim.deepcopy(lsp_servers), mason_tools),
+			ensure_installed = vim.list_extend(vim.deepcopy(servers), mason_tools),
 			run_on_start = true,
 			auto_update = false,
 		})
@@ -305,13 +88,28 @@ return {
 		--------------------------------------------------------------------
 		-- REGISTER + ENABLE SERVERS
 		--------------------------------------------------------------------
-		for name, config in pairs(servers) do
-			local cfg = vim.deepcopy(config)
+		for _, name in ipairs(servers) do
+			-- Correctly require the module based on runtime path
+			-- But since we are creating them in ~/.config/nvim/lsp,
+			-- we cannot easily 'require' them if "lsp" is not in Lua path as a module root,
+			-- unless ~/.config/nvim/lua/lsp existed.
+			-- ~/.config/nvim is in runtime path, but 'require' looks for lua/ directory.
+			-- So `require("lsp.pylsp")` would look for `lua/lsp/pylsp.lua`.
+			-- But our files are in `lsp/pylsp.lua` (top level config dir).
+			-- So we use `dofile` on the absolute path.
 
-			cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+			local config_path = lsp_plugins_path .. "/" .. name .. ".lua"
+			local status, config = pcall(dofile, config_path)
 
-			vim.lsp.config(name, cfg)
-			vim.lsp.enable(name)
+			if not status then
+				vim.notify("Failed to load LSP config for " .. name .. ": " .. config, vim.log.levels.ERROR)
+			else
+				local cfg = vim.deepcopy(config)
+				cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+
+				vim.lsp.config[name] = cfg
+				vim.lsp.enable(name)
+			end
 		end
 	end,
 }

@@ -1,0 +1,2 @@
+-- lsp/jsonls.lua
+return {}

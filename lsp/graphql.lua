@@ -1,0 +1,2 @@
+-- lsp/graphql.lua
+return {}
