@@ -16,6 +16,11 @@ return {
 				python = { "ruff_format" },
 				go = { "goimports", "gofmt" },
 				sh = { "shfmt" },
+				graphql = { "prettier" },
+				java = { "google-java-format" },
+				dockercompose = { "prettier" },
+				cpp = { "clang_format" },
+				sql = { "sql_formatter" },
 			},
 			format_on_save = {
 				timeout_ms = 500,

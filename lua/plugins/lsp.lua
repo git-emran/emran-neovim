@@ -77,6 +77,10 @@ return {
 		--------------------------------------------------------------------
 		local mason_tools = {
 			"stylua",
+			"google-java-format",
+			"sql-formatter",
+			"prettier",
+			"clang-format",
 		}
 
 		require("mason-tool-installer").setup({
