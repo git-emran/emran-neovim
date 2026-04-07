@@ -271,8 +271,18 @@ return {
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
-		config = function()
-			require("nvim-ts-autotag").setup()
+		opts = {
+			-- Neovim 0.12 + missing/failed parsers can make `vim.treesitter.get_parser()`
+			-- return `nil` without throwing, which crashes nvim-ts-autotag's rename autocmd.
+			-- Keep close/auto-pairing behavior, but disable rename-on-InsertLeave.
+			opts = {
+				enable_close = true,
+				enable_rename = false,
+				enable_close_on_slash = true,
+			},
+		},
+		config = function(_, opts)
+			require("nvim-ts-autotag").setup(opts)
 		end,
 	},
 
