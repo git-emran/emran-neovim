@@ -131,6 +131,22 @@ return {
 		"mrcjkb/rustaceanvim",
 		version = "^6",
 		lazy = false,
+		init = function()
+			vim.g.rustaceanvim = {
+				server = {
+					settings = {
+						["rust-analyzer"] = {
+							cargo = { allFeatures = true },
+							checkOnSave = true,
+							check = {
+								command = "clippy",
+							},
+							inlayHints = { locationLinks = false },
+						},
+					},
+				},
+			}
+		end,
 	},
 	{
 		"nvim-neotest/neotest",

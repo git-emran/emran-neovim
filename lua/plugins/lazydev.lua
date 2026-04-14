@@ -20,8 +20,12 @@ return {
 			})
 		end,
 	},
-	{ -- optional blink completion source for require statements and module annotations
+	{
 		"saghen/blink.cmp",
+		version = "*",
+		-- build = "cargo build --release", -- Use this if you have cargo installed and want to build from source
+		-- For pre-built binaries (which checkhealth says you support):
+		build = "npx lucide-cross-init", -- This is a common pattern for blink, but often 'version = "*"' is enough to trigger binary download in lazy.nvim
 		opts = {
 			fuzzy = { implementation = "lua" },
 			sources = {

@@ -16,8 +16,6 @@ return {
 		},
 
 		-- Installs LSPs + tools
-		{ "WhoIsSethDaniel/mason-tool-installer.nvim" },
-
 		-- LSP status
 		{
 			"j-hui/fidget.nvim",
@@ -29,6 +27,7 @@ return {
 				},
 			},
 		},
+
 
 		-- Capabilities
 		"hrsh7th/cmp-nvim-lsp",
@@ -81,6 +80,7 @@ return {
 			"sql-formatter",
 			"prettier",
 			"clang-format",
+			"roslyn",
 		}
 
 		require("mason-tool-installer").setup({
@@ -107,12 +107,11 @@ return {
 
 			if not status then
 				vim.notify("Failed to load LSP config for " .. name .. ": " .. config, vim.log.levels.ERROR)
-			else
+			elseif name ~= "rust_analyzer" then
 				local cfg = vim.deepcopy(config)
 				cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
 
-				vim.lsp.config[name] = cfg
-				vim.lsp.enable(name)
+				require("lspconfig")[name].setup(cfg)
 			end
 		end
 	end,
