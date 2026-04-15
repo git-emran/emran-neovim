@@ -2,13 +2,14 @@ return {
 	-- DAP core + UI + virtual text + Mason integration
 	{
 		"mfussenegger/nvim-dap",
+		event = "VeryLazy",
 		dependencies = {
 			-- Creates a beautiful debugger UI
 			"rcarriga/nvim-dap-ui",
 			"nvim-neotest/nvim-nio",
 
 			-- Installs the debug adapters for you
-			"williamboman/mason.nvim",
+			"mason-org/mason.nvim",
 			"jay-babu/mason-nvim-dap.nvim",
 
 			-- Add your own debuggers here
@@ -43,8 +44,8 @@ return {
 			vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
 			vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
 			vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
-			vim.keymap.set("n", "<leader>b", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
-			vim.keymap.set("n", "<leader>B", function()
+			vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
+			vim.keymap.set("n", "<leader>dB", function()
 				dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
 			end, { desc = "Debug: Set Breakpoint" })
 
@@ -130,7 +131,7 @@ return {
 	{
 		"mrcjkb/rustaceanvim",
 		version = "^6",
-		lazy = false,
+		ft = { "rust" },
 		init = function()
 			vim.g.rustaceanvim = {
 				server = {

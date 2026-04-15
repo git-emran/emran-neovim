@@ -1,6 +1,7 @@
 return {
 	{ -- Autocompletion
 		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
 		dependencies = {
 			-- Snippet Engine & its associated nvim-cmp source
 			"hrsh7th/cmp-nvim-lsp",
@@ -149,34 +150,10 @@ return {
 					end, { "i", "s" }),
 				}),
 				sources = {
-					{
-						name = "lazydev",
-						-- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-						group_index = 0,
-					},
 					{ name = "nvim_lsp" },
 					{ name = "luasnip" },
 					{ name = "buffer" },
 					{ name = "path" },
-					{ name = "nvim_lsp_signature_help" },
-					{
-						name = "spell",
-						option = {
-							keep_all_entries = false,
-							enable_in_context = function()
-								return true
-							end,
-							preselect_correct_word = true,
-						},
-					},
-					{
-						name = "go_deep",
-						keyword_length = 3,
-						max_item_count = 5,
-						option = {
-							-- See below for configuration options
-						},
-					},
 				},
 				formatting = {
 					fields = { "kind", "abbr", "menu" },

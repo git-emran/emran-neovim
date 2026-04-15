@@ -21,8 +21,18 @@ vim.keymap.set("n", "x", '"_x', opts)
 -- vim.keymap.set("n", "<C-d>", "<C-d>zz", opts)
 -- vim.keymap.set("n", "<C-u>", "<C-u>zz", opts)
 
-vim.keymap.set("n", "<C-u>", "<C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>")
-vim.keymap.set("n", "<C-d>", "<C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e>")
+vim.keymap.set(
+	"n",
+	"<C-u>",
+	"<C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y><C-y>",
+	opts
+)
+vim.keymap.set(
+	"n",
+	"<C-d>",
+	"<C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e><C-e>",
+	opts
+)
 
 -- Find and center
 vim.keymap.set("n", "n", "nzzzv", opts)

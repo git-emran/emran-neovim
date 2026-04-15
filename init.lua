@@ -1,3 +1,7 @@
+pcall(function()
+	vim.loader.enable()
+end)
+
 require("core.keymaps")
 require("core.options")
 require("core.snippets")
@@ -22,7 +26,6 @@ require("lazy").setup({
 	require("plugins.lazydev"),
 	require("plugins.coding"),
 	require("plugins.editor-ui"),
-	require("plugins.none-ls"),
 	require("plugins.treesitter"),
 	require("plugins.colortheme"),
 	require("plugins.color-highlight"),

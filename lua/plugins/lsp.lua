@@ -16,6 +16,8 @@ return {
 		},
 
 		-- Installs LSPs + tools
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+
 		-- LSP status
 		{
 			"j-hui/fidget.nvim",
@@ -53,13 +55,14 @@ return {
 		-- We scan ~/.config/nvim/lsp/*.lua and load each file.
 		-- Each file returns a config table valid for vim.lsp.config[name].
 		local lsp_plugins_path = vim.fn.stdpath("config") .. "/lsp"
-		local handle = vim.loop.fs_scandir(lsp_plugins_path)
+		local uv = vim.uv or vim.loop
+		local handle = uv.fs_scandir(lsp_plugins_path)
 
 		local servers = {}
 
 		if handle then
 			while true do
-				local name, type = vim.loop.fs_scandir_next(handle)
+				local name, type = uv.fs_scandir_next(handle)
 				if not name then
 					break
 				end
@@ -111,7 +114,25 @@ return {
 				local cfg = vim.deepcopy(config)
 				cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
 
-				require("lspconfig")[name].setup(cfg)
+				-- Neovim 0.11+ + nvim-lspconfig v2+: use vim.lsp.config/vim.lsp.enable,
+				-- not the deprecated require('lspconfig')[...].setup(...)
+				if name == "roslyn" then
+					-- nvim-lspconfig provides defaults as `roslyn_ls`; roslyn.nvim expects server name `roslyn`.
+					-- Seed `roslyn` with the upstream defaults, then override with user settings.
+					vim.lsp.config("roslyn_ls", {})
+					local base = vim.deepcopy(vim.lsp.config["roslyn_ls"] or {})
+					if base.cmd and vim.fn.executable("roslyn") == 1 then
+						base.cmd[1] = "roslyn"
+					end
+
+					local merged = vim.tbl_deep_extend("force", base, cfg)
+					merged.capabilities = vim.tbl_deep_extend("force", {}, base.capabilities or {}, cfg.capabilities or {})
+					vim.lsp.config("roslyn", merged)
+					vim.lsp.enable("roslyn")
+				else
+					vim.lsp.config(name, cfg)
+					vim.lsp.enable(name)
+				end
 			end
 		end
 	end,

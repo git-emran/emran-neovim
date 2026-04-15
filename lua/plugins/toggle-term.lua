@@ -1,10 +1,30 @@
 return {
 	"akinsho/toggleterm.nvim",
 	version = "*",
+	init = function()
+		local lazygit_term
+
+		_G._toggleterm_toggle_lazygit = function()
+			local Terminal = require("toggleterm.terminal").Terminal
+			if not lazygit_term then
+				lazygit_term = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
+			end
+			lazygit_term:toggle()
+		end
+	end,
+	keys = {
+		{ "<C-\\>", "<cmd>ToggleTerm<cr>", mode = { "n", "t" }, desc = "Toggle terminal" },
+		{
+			"<leader>gg",
+			function()
+				_G._toggleterm_toggle_lazygit()
+			end,
+			desc = "Open LazyGit",
+		},
+	},
 	config = function()
 		require("toggleterm").setup({
 			size = 20,
-			open_mapping = [[<C-\>]], -- Ctrl + \
 			hide_numbers = true,
 			shade_filetypes = {},
 			shade_terminals = true,
@@ -18,12 +38,5 @@ return {
 			shell = vim.o.shell,
 			dir = "git_dir",
 		})
-		-- Lazygit integration
-		local Terminal = require("toggleterm.terminal").Terminal
-		local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-
-		vim.keymap.set("n", "<leader>gg", function()
-			lazygit:toggle()
-		end, { desc = "Open LazyGit" })
 	end,
 }
