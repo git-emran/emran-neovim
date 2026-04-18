@@ -30,7 +30,6 @@ return {
 			},
 		},
 
-
 		-- Capabilities
 		"hrsh7th/cmp-nvim-lsp",
 	},
@@ -126,7 +125,8 @@ return {
 					end
 
 					local merged = vim.tbl_deep_extend("force", base, cfg)
-					merged.capabilities = vim.tbl_deep_extend("force", {}, base.capabilities or {}, cfg.capabilities or {})
+					merged.capabilities =
+						vim.tbl_deep_extend("force", {}, base.capabilities or {}, cfg.capabilities or {})
 					vim.lsp.config("roslyn", merged)
 					vim.lsp.enable("roslyn")
 				else

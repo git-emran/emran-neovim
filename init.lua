@@ -21,26 +21,30 @@ if not vim.uv.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("lazy").setup({
-	require("plugins.lsp"),
-	require("plugins.lazydev"),
-	require("plugins.coding"),
-	require("plugins.editor-ui"),
-	require("plugins.treesitter"),
-	require("plugins.colortheme"),
-	require("plugins.color-highlight"),
-	require("plugins.debug"),
-	require("plugins.telescope"),
-	require("plugins.snacks"),
-	require("plugins.trouble"),
-	require("plugins.lualine"),
-	require("plugins.markdown-render"),
-	require("plugins.conform"),
-	require("plugins.copilot-supermaven"),
-	require("plugins.zenmode"),
-	require("plugins.folke-flash"),
-	require("plugins.toggle-term"),
-	require("plugins.typst"),
-	require("plugins.jdtls"),
-	require("plugins.roslyn"),
+---@type LazySpec
+local plugins = "plugins"
+
+require("lazy").setup(plugins, {
+	ui = {
+		border = "rounded",
+	},
+	install = {
+		-- Do not install missing plugins on startup.
+		missing = false,
+	},
+	performance = {
+		rtp = {
+			disabled_plugins = {
+				"gzip",
+				"netrwPlugin",
+				"rplugin",
+				"tarPlugin",
+				"tohtml",
+				"tutor",
+				"zipPlugin",
+			},
+		},
+	},
 })
+
+require("vim._core.ui2").enable({})
