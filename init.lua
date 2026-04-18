@@ -28,6 +28,7 @@ require("lazy").setup(plugins, {
 	ui = {
 		border = "rounded",
 	},
+	rocks = { enabled = false },
 	install = {
 		-- Do not install missing plugins on startup.
 		missing = false,

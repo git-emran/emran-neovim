@@ -1,8 +1,8 @@
 -- lua/plugins/lsp.lua
+
 return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
-
 	dependencies = {
 		{ "mason-org/mason.nvim", config = true },
 
@@ -111,7 +111,7 @@ return {
 				vim.notify("Failed to load LSP config for " .. name .. ": " .. config, vim.log.levels.ERROR)
 			elseif name ~= "rust_analyzer" then
 				local cfg = vim.deepcopy(config)
-				cfg.capabilities = vim.tbl_deep_extend("force", {}, capabilities, cfg.capabilities or {})
+				cfg.capabilities = vim.tbl_deep_extend("force", capabilities, cfg.capabilities or {})
 
 				-- Neovim 0.11+ + nvim-lspconfig v2+: use vim.lsp.config/vim.lsp.enable,
 				-- not the deprecated require('lspconfig')[...].setup(...)
