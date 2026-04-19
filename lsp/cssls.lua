@@ -1,8 +1,7 @@
--- lsp/cssls.lua
+-- Install with: npm i -g vscode-langservers-extracted
+---@type vim.lsp.Config
 return {
-	settings = {
-		css = { lint = { unknownAtRules = "ignore" } },
-		scss = { lint = { unknownAtRules = "ignore" } },
-		less = { lint = { unknownAtRules = "ignore" } },
-	},
+  cmd = { 'vscode-css-language-server', '--stdio' },
+  filetypes = { 'css', 'scss', 'less' },
+  root_markers = { 'package.json', '.git' },
 }

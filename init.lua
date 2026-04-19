@@ -2,6 +2,9 @@ pcall(function()
 	vim.loader.enable()
 end)
 
+-- Ensure Homebrew binaries are in the path.
+vim.env.PATH = "/opt/homebrew/bin:" .. vim.env.PATH
+
 require("core.keymaps")
 require("core.options")
 require("core.snippets")
@@ -20,8 +23,6 @@ if not vim.uv.fs_stat(lazypath) then
 	})
 end
 vim.opt.rtp:prepend(lazypath)
-
----@type LazySpec
 local plugins = "plugins"
 
 require("lazy").setup(plugins, {
@@ -47,5 +48,7 @@ require("lazy").setup(plugins, {
 		},
 	},
 })
+
+require("lsp")
 
 require("vim._core.ui2").enable({})

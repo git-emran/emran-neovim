@@ -1,21 +1,25 @@
--- lsp/pylsp.lua
+-- Install with: pip install "python-lsp-server[all]"
+---@type vim.lsp.Config
 return {
-	settings = {
-		pylsp = {
-			configurationSources = {},
-			plugins = {
-				pycodestyle = {
-					enabled = true,
-					ignore = { "W391" },
-					maxLineLength = 100,
-					["max-line-length"] = 100,
-				},
-				flake8 = { enabled = false },
-				pydocstyle = { enabled = false },
-				mccabe = { enabled = false },
-				pyflakes = { enabled = false },
-				pylint = { enabled = false },
-			},
-		},
-	},
+  cmd = { 'pylsp' },
+  filetypes = { 'python' },
+  root_markers = {
+    'pyproject.toml',
+    'setup.py',
+    'setup.cfg',
+    'requirements.txt',
+    'Pipfile',
+    '.git',
+  },
+  settings = {
+    pylsp = {
+      plugins = {
+        pycodestyle = { enabled = false },
+        mccabe = { enabled = false },
+        pyflakes = { enabled = false },
+        pylint = { enabled = false },
+        ruff = { enabled = true },
+      },
+    },
+  },
 }

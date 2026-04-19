@@ -45,19 +45,35 @@ return {
 					sort_by = "insert_at_end",
 				},
 				highlights = {
+					-- Ensure transparency across all parts of the bufferline
+					fill = { bg = "none" },
+					background = { bg = "none" },
+					tab = { bg = "none" },
+					tab_selected = { bg = "none" },
+					tab_separator = { bg = "none", fg = "#434C5E" },
+					tab_separator_selected = { bg = "none", fg = "#434C5E" },
+
 					separator = {
 						fg = "#434C5E",
+						bg = "none",
+					},
+					separator_selected = {
+						fg = "#434C5E",
+						bg = "none",
+					},
+					separator_visible = {
+						fg = "#434C5E",
+						bg = "none",
 					},
 					buffer_selected = {
 						bold = true,
 						italic = false,
 					},
-					-- separator_selected = {},
-					-- tab_selected = {},
-					-- background = {},
-					-- indicator_selected = {},
-					-- fill = {},
+					buffer_visible = {
+						bg = "none",
+					},
 				},
+
 			})
 		end,
 	},

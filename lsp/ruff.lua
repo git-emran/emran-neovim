@@ -1,13 +1,7 @@
--- lsp/ruff.lua
+-- Install with: pip install ruff
+---@type vim.lsp.Config
 return {
-	filetypes = { "python" },
-	root_markers = {
-		"pyproject.toml",
-		"ruff.toml",
-		".ruff.toml",
-		".git",
-	},
-	settings = {
-		["line-length"] = 100,
-	},
+  cmd = { 'ruff', 'server' },
+  filetypes = { 'python' },
+  root_markers = { 'pyproject.toml', 'ruff.toml', '.ruff.toml', '.git' },
 }

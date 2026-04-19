@@ -1,7 +1,7 @@
--- lsp/tinymist.lua
+-- Install with: cargo install tinymist
+---@type vim.lsp.Config
 return {
-	filetypes = { "typst" },
-	settings = {
-		formatterMode = "typstyle",
-	},
+  cmd = { 'tinymist' },
+  filetypes = { 'typst' },
+  root_markers = { '.git' },
 }

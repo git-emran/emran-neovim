@@ -1,10 +1,6 @@
--- lsp/sqls.lua
+---@type vim.lsp.Config
 return {
-	settings = {
-		sqls = {
-			connections = {
-				-- Add your connections here
-			},
-		},
-	},
+  cmd = { 'sqls' },
+  filetypes = { 'sql', 'mysql' },
+  root_markers = { '.git' },
 }

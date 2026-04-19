@@ -1,30 +1,28 @@
--- lsp/lua_ls.lua
+---@type vim.lsp.Config
 return {
-	settings = {
-		Lua = {
-			completion = { callSnippet = "Replace" },
-			runtime = {
-				version = "LuaJIT",
-				path = vim.split(package.path, ";"),
-			},
-			workspace = {
-				checkThirdParty = false,
-				library = {
-					vim.env.VIMRUNTIME,
-					vim.fn.stdpath("config") .. "/lua",
-				},
-				maxPreload = 100000,
-				preloadFileSize = 10000,
-			},
-			diagnostics = {
-				globals = { "vim", "use" },
-				disable = {
-					"missing-fields",
-					"incomplete-signature-doc",
-				},
-			},
-			format = { enable = false },
-			telemetry = { enable = false },
-		},
-	},
+    cmd = { 'lua-language-server' },
+    filetypes = { 'lua' },
+    root_markers = { '.luarc.json', '.luarc.jsonc' },
+    -- NOTE: These will be merged with the configuration file.
+    settings = {
+        Lua = {
+            completion = { callSnippet = 'Replace' },
+            -- Using stylua for formatting.
+            format = { enable = false },
+            hint = {
+                enable = true,
+                arrayIndex = 'Disable',
+            },
+            runtime = {
+                version = 'LuaJIT',
+            },
+            workspace = {
+                checkThirdParty = false,
+                library = {
+                    vim.env.VIMRUNTIME,
+                    '${3rd}/luv/library',
+                },
+            },
+        },
+    },
 }

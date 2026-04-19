@@ -1,12 +1,7 @@
--- lsp/dockerls.lua
+-- Install with: npm i -g dockerfile-language-server-nodejs
+---@type vim.lsp.Config
 return {
-	settings = {
-		docker = {
-			languageserver = {
-				formatter = {
-					ignoreMultilineInstructions = true,
-				},
-			},
-		},
-	},
+  cmd = { 'docker-langserver', '--stdio' },
+  filetypes = { 'dockerfile' },
+  root_markers = { 'Dockerfile', '.git' },
 }
