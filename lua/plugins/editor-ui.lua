@@ -73,7 +73,6 @@ return {
 						bg = "none",
 					},
 				},
-
 			})
 		end,
 	},

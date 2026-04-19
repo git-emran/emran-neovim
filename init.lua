@@ -25,13 +25,19 @@ end
 vim.opt.rtp:prepend(lazypath)
 local plugins = "plugins"
 
+-- General setup (order matters here)
+require("commands")
+require("autocmds")
+require("statusline")
+require("lsp")
+
 require("lazy").setup(plugins, {
 	ui = {
 		border = "rounded",
 	},
 	rocks = { enabled = false },
 	install = {
-		-- Do not install missing plugins on startup.
+		-- Do not install missing plugins on sfartup.
 		missing = false,
 	},
 	performance = {

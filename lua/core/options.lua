@@ -1,4 +1,5 @@
 vim.o.number = true -- Make line numbers default (default: false)
+vim.o.mousescroll = "ver:3,hor:0"
 vim.o.relativenumber = true -- Set relative numbered lines (default: false)
 vim.o.clipboard = "unnamedplus" -- Sync clipboard between OS and Neovim. (default: '')
 vim.o.linebreak = true -- Companion to wrap, don't split words (default: false)
@@ -28,6 +29,7 @@ vim.o.backspace = "indent,eol,start" -- Allow backspace on (default: 'indent,eol
 vim.o.pumheight = 10 -- Pop up menu height (default: 0)
 vim.o.conceallevel = 0 -- So that `` is visible in markdown files (default: 1)
 vim.o.signcolumn = "yes" -- Keep signcolumn on by default (default: 'auto')
+vim.o.winborder = "rounded"
 
 vim.o.fileencoding = "utf-8" -- The encoding written to a file (default: 'utf-8')
 vim.o.cmdheight = 1 -- More space in the Neovim command line for displaying messages (default: 1)
@@ -47,3 +49,10 @@ vim.opt.wrap = true
 vim.opt.linebreak = true
 vim.opt.breakindent = true
 vim.opt.showbreak = "↳ "
+vim.o.undofile = true
+
+-- Disable health checks for these providers.
+vim.g.loaded_python3_provider = 0
+-- vim.g.loaded_ruby_provider = 0
+-- vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
