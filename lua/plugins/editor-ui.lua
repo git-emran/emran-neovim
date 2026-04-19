@@ -52,26 +52,6 @@ return {
 					tab_selected = { bg = "none" },
 					tab_separator = { bg = "none", fg = "#434C5E" },
 					tab_separator_selected = { bg = "none", fg = "#434C5E" },
-
-					separator = {
-						fg = "#434C5E",
-						bg = "none",
-					},
-					separator_selected = {
-						fg = "#434C5E",
-						bg = "none",
-					},
-					separator_visible = {
-						fg = "#434C5E",
-						bg = "none",
-					},
-					buffer_selected = {
-						bold = true,
-						italic = false,
-					},
-					buffer_visible = {
-						bg = "none",
-					},
 				},
 			})
 		end,
