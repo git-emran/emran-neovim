@@ -2,6 +2,8 @@ pcall(function()
 	vim.loader.enable()
 end)
 
+-- vim.cmd.colorscheme("miss-dracula")
+
 -- Ensure Homebrew binaries are in the path.
 vim.env.PATH = "/opt/homebrew/bin:" .. vim.env.PATH
 
@@ -31,6 +33,8 @@ require("autocmds")
 require("statusline")
 require("lsp")
 
+vim.pack.add({})
+
 require("lazy").setup(plugins, {
 	ui = {
 		border = "rounded",
@@ -54,7 +58,5 @@ require("lazy").setup(plugins, {
 		},
 	},
 })
-
-require("lsp")
-
+vim.cmd.packadd("nvim.undotree")
 require("vim._core.ui2").enable({})
