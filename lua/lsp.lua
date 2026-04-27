@@ -1,5 +1,7 @@
 local diagnostic_icons = require("icons").diagnostics
 
+vim.hl.priorities.semantic_tokens = 95 -- Or any number lower than 100, treesitter's priority level
+
 local M = {}
 
 -- Disable inlay hints initially (and enable if needed with my ToggleInlayHints command).
@@ -30,6 +32,8 @@ local function on_attach(client, bufnr)
 
 	if client:supports_method("textDocument/codeAction") then
 		require("lightbulb").attach_lightbulb(bufnr, client)
+		keymap("<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", "Code action", { "n", "x" })
+		keymap("gra", "<cmd>FzfLua lsp_code_actions<cr>", "Code action", { "n", "x" })
 	end
 
 	if client:supports_method("textDocument/documentColor") then

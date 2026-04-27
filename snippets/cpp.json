@@ -1,0 +1,59 @@
+{
+  "Main function": {
+    "prefix": "main",
+    "body": [
+      "#include <iostream>",
+      "",
+      "int main() {",
+      "    ${1:std::cout << \"Hello, World!\" << std::endl;}",
+      "    $0",
+      "    return 0;",
+      "}"
+    ],
+    "description": "Standard main function template"
+  },
+  "Print to console": {
+    "prefix": "cout",
+    "body": [
+      "std::cout << ${1:\"message\"} << std::endl;"
+    ],
+    "description": "std::cout with endl"
+  },
+  "For loop": {
+    "prefix": "for",
+    "body": [
+      "for (int ${1:i} = 0; ${1:i} < ${2:count}; ++${1:i}) {",
+      "    $0",
+      "}"
+    ],
+    "description": "Standard for loop"
+  },
+  "Class": {
+    "prefix": "class",
+    "body": [
+      "class ${1:ClassName} {",
+      "public:",
+      "    ${1:ClassName}(${2:params});",
+      "    ~${1:ClassName}();",
+      "",
+      "private:",
+      "    $0",
+      "};"
+    ],
+    "description": "Class template"
+  },
+  "Vector": {
+    "prefix": "vector",
+    "body": [
+      "std::vector<${1:T}> ${2:vec};"
+    ],
+    "description": "std::vector"
+  },
+  "Include header": {
+    "prefix": "inc",
+    "body": [
+      "#include <${1:iostream}>"
+    ],
+    "description": "Standard include"
+  }
+}

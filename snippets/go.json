@@ -1,0 +1,60 @@
+{
+  "Main function": {
+    "prefix": "main",
+    "body": [
+      "package main",
+      "",
+      "import \"fmt\"",
+      "",
+      "func main() {",
+      "\t${1:fmt.Println(\"Hello, World!\")}",
+      "}"
+    ],
+    "description": "Basic main function template"
+  },
+  "Error check": {
+    "prefix": "err",
+    "body": [
+      "if err != nil {",
+      "\t${1:return err}",
+      "}"
+    ],
+    "description": "Standard Go error check"
+  },
+  "Function": {
+    "prefix": "func",
+    "body": [
+      "func ${1:name}(${2:params}) ${3:error} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Function template"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "type ${1:Name} struct {",
+      "\t${2:Field} ${3:type}",
+      "}"
+    ],
+    "description": "Struct template"
+  },
+  "Test": {
+    "prefix": "test",
+    "body": [
+      "func Test${1:Name}(t *testing.T) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Test function template"
+  },
+  "HTTP Handler": {
+    "prefix": "handler",
+    "body": [
+      "func ${1:handler}(w http.ResponseWriter, r *http.Request) {",
+      "\t$0",
+      "}"
+    ],
+    "description": "HTTP handler template"
+  }
+}

@@ -2,8 +2,16 @@
 return {
 	{
 		"saghen/blink.cmp",
-		dependencies = "LuaSnip",
-		build = "cargo +nightly build --release",
+		version = "*", -- Use a release tag for stability and prebuilt binaries
+		dependencies = {
+			"L3MON4D3/LuaSnip",
+			"saghen/blink.lib",
+			"rafamadriz/friendly-snippets",
+		},
+		build = function()
+			require("blink.cmp").build():wait(60000)
+		end,
+		event = "InsertEnter",
 		lazy = false,
 		opts = {
 			keymap = {
@@ -11,13 +19,13 @@ return {
 				["<C-\\>"] = { "hide", "fallback" },
 				["<C-n>"] = { "select_next", "show" },
 				["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+				["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 				["<C-p>"] = { "select_prev" },
 				["<C-b>"] = { "scroll_documentation_up", "fallback" },
 				["<C-f>"] = { "scroll_documentation_down", "fallback" },
 			},
 			completion = {
 				list = {
-					-- Insert items while navigating the completion list.
 					selection = { preselect = false, auto_insert = true },
 					max_items = 10,
 				},
@@ -34,10 +42,8 @@ return {
 				},
 			},
 			snippets = { preset = "luasnip" },
-			-- Disable command line completion:
 			cmdline = { enabled = false },
 			sources = {
-				-- Disable some sources in comments and strings.
 				default = function()
 					local sources = { "lsp", "buffer" }
 					local ok, node = pcall(vim.treesitter.get_node)

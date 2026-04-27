@@ -184,6 +184,10 @@ return {
 				},
 			}
 		end,
+		config = function(_, opts)
+			require("fzf-lua").setup(opts)
+			require("fzf-lua").register_ui_select()
+		end,
 		init = function()
 			local old_select = vim.ui.select
 			---@diagnostic disable-next-line: duplicate-set-field

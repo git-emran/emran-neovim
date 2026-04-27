@@ -1,31 +1,69 @@
+-- Formatting.
 return {
-	"stevearc/conform.nvim",
-	event = { "BufReadPost", "BufNewFile" },
-	config = function()
-		require("conform").setup({
-			formatters_by_ft = {
-				c = { "clang_format" },
-				lua = { "stylua" },
-				javascript = { "prettier" },
-				typescript = { "prettier" },
-				html = { "prettier" },
-				css = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
-				python = { "ruff_format" },
-				go = { "goimports", "gofmt" },
-				sh = { "shfmt" },
-				graphql = { "prettier" },
-				java = { "google-java-format" },
-				dockercompose = { "prettier" },
-				cpp = { "clang_format" },
-				sql = { "sql_formatter" },
-			},
-			format_on_save = {
-				timeout_ms = 500,
-				lsp_fallback = true,
-			},
-		})
-	end,
+    {
+        'stevearc/conform.nvim',
+        event = {'BufWritePre', 'BufNewFile'},
+        opts = {
+            -- Leave me alone.
+            notify_on_error = false,
+            notify_no_formatters = false,
+            formatters_by_ft = {
+                c = { name = 'clangd', timeout_ms = 500, lsp_format = 'prefer' },
+                go = { name = 'gopls', timeout_ms = 500, lsp_format = 'prefer' },
+                java = { 'google-java-format' },
+                javascript = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                javascriptreact = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                json = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                jsonc = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                less = { 'prettier' },
+                lua = { 'stylua' },
+                markdown = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                rust = { name = 'rust_analyzer', timeout_ms = 500, lsp_format = 'prefer' },
+                scss = { 'prettier' },
+                sh = { 'shfmt' },
+                typescript = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                typescriptreact = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
+                yaml = { 'prettier' },
+                python = {'ruff_format'},
+                -- For filetypes without a formatter:
+                ['_'] = { 'trim_whitespace', 'trim_newlines' },
+            },
+            format_on_save = function()
+                if vim.bo.filetype == 'java' then
+                    -- Java formatting is too slow to do on save.
+                    return nil
+                end
+
+                -- Don't format when minifiles is open, since that triggers the "confirm without
+                -- synchronization" message.
+                if vim.g.minifiles_active then
+                    return nil
+                end
+
+                -- Skip formatting if triggered from my special save command.
+                if vim.g.skip_formatting then
+                    vim.g.skip_formatting = false
+                    return nil
+                end
+
+                -- Stop if we disabled auto-formatting.
+                if not vim.g.autoformat then
+                    return nil
+                end
+
+                return {}
+            end,
+            formatters = {
+                -- Require a Prettier configuration file to format.
+                prettier = { require_cwd = true },
+            },
+        },
+        init = function()
+            -- Use conform for gq.
+            vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+            -- Start auto-formatting by default (and disable with my ToggleFormat command).
+            vim.g.autoformat = true
+        end,
+    },
 }
