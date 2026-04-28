@@ -203,6 +203,13 @@ return {
 				head = "RenderMarkdownTableHead",
 				row = "RenderMarkdownTableRow",
 			},
+			overrides = {
+				buftype = {
+					nofile = {
+						enabled = false,
+					},
+				},
+			},
 		},
 	},
 }

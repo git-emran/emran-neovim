@@ -1,0 +1,105 @@
+{
+  "Main function": {
+    "prefix": "main",
+    "body": [
+      "fn main() {",
+      "\t${1:println!(\"Hello, World!\");}",
+      "}"
+    ],
+    "description": "Standard Rust main function"
+  },
+  "Function": {
+    "prefix": "fn",
+    "body": [
+      "fn ${1:name}(${2:params}) ${3:-> ${4:type}} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Function template"
+  },
+  "Print line": {
+    "prefix": "pln",
+    "body": [
+      "println!(\"${1:{:?}}\", ${2:var});"
+    ],
+    "description": "Print with newline"
+  },
+  "Test module": {
+    "prefix": "modtest",
+    "body": [
+      "#[cfg(test)]",
+      "mod tests {",
+      "\tuse super::*;",
+      "",
+      "\t#[test]",
+      "\tfn ${1:test_name}() {",
+      "\t\t$0",
+      "\t}",
+      "}"
+    ],
+    "description": "Test module template"
+  },
+  "Test function": {
+    "prefix": "test",
+    "body": [
+      "#[test]",
+      "fn ${1:test_name}() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Test function template"
+  },
+  "Struct": {
+    "prefix": "struct",
+    "body": [
+      "struct ${1:Name} {",
+      "\t${2:field}: ${3:Type},",
+      "}"
+    ],
+    "description": "Struct template"
+  },
+  "Enum": {
+    "prefix": "enum",
+    "body": [
+      "enum ${1:Name} {",
+      "\t${2:Variant},",
+      "}"
+    ],
+    "description": "Enum template"
+  },
+  "Implementation": {
+    "prefix": "impl",
+    "body": [
+      "impl ${1:Name} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "Implementation block"
+  },
+  "Match": {
+    "prefix": "match",
+    "body": [
+      "match ${1:expression} {",
+      "\t${2:pattern} => ${3:expression},",
+      "\t_ => ${4:unreachable!()},",
+      "}"
+    ],
+    "description": "Match expression"
+  },
+  "If let": {
+    "prefix": "iflet",
+    "body": [
+      "if let ${1:Some(val)} = ${2:option} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "If let expression"
+  },
+  "Derive": {
+    "prefix": "derive",
+    "body": [
+      "#[derive(${1:Debug, Clone, PartialEq})]"
+    ],
+    "description": "Derive macro"
+  }
+}

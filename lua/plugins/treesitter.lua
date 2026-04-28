@@ -2,6 +2,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
+		branch = "main",
 		lazy = false,
 		dependencies = {
 			{
@@ -35,8 +36,11 @@ return {
 			},
 		},
 		build = ":TSUpdate",
-		opts = {
-			ensure_installed = {
+		config = function(_, opts)
+			require("nvim-treesitter").setup()
+
+			-- Make sure that the following are installed:
+			require("nvim-treesitter").install {
 				"bash",
 				"c",
 				"cpp",
@@ -65,12 +69,7 @@ return {
 				"vim",
 				"vimdoc",
 				"yaml",
-			},
-			highlight = { enable = true },
-			indent = { enable = true },
-		},
-		config = function(_, opts)
-			require("nvim-treesitter.configs").setup(opts)
+			}
 		end,
 	},
 }
