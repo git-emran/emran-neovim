@@ -32,7 +32,6 @@ local plugins = 'plugins'
 require 'commands'
 require 'autocmds'
 require 'statusline'
-require 'winbar'
 require 'lsp'
 
 require('lazy').setup(plugins, {
