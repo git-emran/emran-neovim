@@ -7,8 +7,7 @@ local M = {}
 ---@field on_setup? fun():nil Optional function to run after the plugin is loaded and configured
 
 --- Helper function for adding and configuring plugins to the current session on a specific event.
----
----@param event vim.api.keyset.events
+---@param event vim.api.keyset.events|vim.api.keyset.events[]
 ---@param plugins PluginSpec[]
 function M.add_on_event(event, plugins)
     vim.api.nvim_create_autocmd(event, {
@@ -54,3 +53,4 @@ function M.on_plugin_update(plugin_name, cmd)
 end
 
 return M
+
