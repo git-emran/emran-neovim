@@ -282,13 +282,13 @@ function M.render()
     return table.concat {
         concat_components {
             M.mode_component(),
-            M.filepath_component(),
             M.git_component(),
             M.dap_component() or M.lsp_progress_component(),
         },
         '%#StatusLine#%=',
         concat_components {
             vim.diagnostic.status(),
+            M.filepath_component(),
             M.filetype_component(),
             M.encoding_component(),
             M.position_component(),
