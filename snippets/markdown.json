@@ -1,0 +1,157 @@
+{
+  "Bold": {
+    "prefix": "bold",
+    "body": ["**${1:text}**"],
+    "description": "Bold text"
+  },
+  "Italic": {
+    "prefix": "italic",
+    "body": ["*${1:text}*"],
+    "description": "Italic text"
+  },
+  "Bold Italic": {
+    "prefix": "bolditalic",
+    "body": ["***${1:text}***"],
+    "description": "Bold and italic text"
+  },
+  "Strikethrough": {
+    "prefix": "strike",
+    "body": ["~~${1:text}~~"],
+    "description": "Strikethrough text"
+  },
+  "Inline Code": {
+    "prefix": "code",
+    "body": ["`${1:code}`"],
+    "description": "Inline code"
+  },
+  "Code Block": {
+    "prefix": "codeblock",
+    "body": [
+      "```${1:language}",
+      "${2:code}",
+      "```"
+    ],
+    "description": "Fenced code block"
+  },
+  "Heading 1": {
+    "prefix": "h1",
+    "body": ["# ${1:Heading}"],
+    "description": "Heading level 1"
+  },
+  "Heading 2": {
+    "prefix": "h2",
+    "body": ["## ${1:Heading}"],
+    "description": "Heading level 2"
+  },
+  "Heading 3": {
+    "prefix": "h3",
+    "body": ["### ${1:Heading}"],
+    "description": "Heading level 3"
+  },
+  "Heading 4": {
+    "prefix": "h4",
+    "body": ["#### ${1:Heading}"],
+    "description": "Heading level 4"
+  },
+  "Link": {
+    "prefix": "link",
+    "body": ["[${1:text}](${2:url})"],
+    "description": "Hyperlink"
+  },
+  "Image": {
+    "prefix": "img",
+    "body": ["![${1:alt text}](${2:url})"],
+    "description": "Image"
+  },
+  "Image with Title": {
+    "prefix": "imgt",
+    "body": ["![${1:alt text}](${2:url} \"${3:title}\")"],
+    "description": "Image with title tooltip"
+  },
+  "Blockquote": {
+    "prefix": "bq",
+    "body": ["> ${1:quote}"],
+    "description": "Blockquote"
+  },
+  "Unordered List": {
+    "prefix": "ul",
+    "body": [
+      "- ${1:item}",
+      "- ${2:item}",
+      "- ${3:item}"
+    ],
+    "description": "Unordered list"
+  },
+  "Ordered List": {
+    "prefix": "ol",
+    "body": [
+      "1. ${1:item}",
+      "2. ${2:item}",
+      "3. ${3:item}"
+    ],
+    "description": "Ordered list"
+  },
+  "Task List": {
+    "prefix": "tasklist",
+    "body": [
+      "- [ ] ${1:task}",
+      "- [ ] ${2:task}",
+      "- [ ] ${3:task}"
+    ],
+    "description": "GitHub-style task list"
+  },
+  "Task Item": {
+    "prefix": "task",
+    "body": ["- [ ] ${1:task}"],
+    "description": "Single task list item"
+  },
+  "Horizontal Rule": {
+    "prefix": "hr",
+    "body": ["---"],
+    "description": "Horizontal rule"
+  },
+  "Table": {
+    "prefix": "table",
+    "body": [
+      "| ${1:Column 1} | ${2:Column 2} | ${3:Column 3} |",
+      "| ----------- | ----------- | ----------- |",
+      "| ${4:cell}   | ${5:cell}   | ${6:cell}   |"
+    ],
+    "description": "Markdown table"
+  },
+  "Footnote": {
+    "prefix": "footnote",
+    "body": ["[^${1:label}]: ${2:description}"],
+    "description": "Footnote definition"
+  },
+  "Footnote Reference": {
+    "prefix": "fnref",
+    "body": ["[^${1:label}]"],
+    "description": "Inline footnote reference"
+  },
+  "Front Matter": {
+    "prefix": "frontmatter",
+    "body": [
+      "---",
+      "title: ${1:Title}",
+      "date: ${2:2026-01-01}",
+      "tags: [${3:tag}]",
+      "---",
+      "",
+      "$0"
+    ],
+    "description": "YAML front matter block"
+  },
+  "Details / Summary": {
+    "prefix": "details",
+    "body": [
+      "<details>",
+      "<summary>${1:Summary}</summary>",
+      "",
+      "${2:Content}",
+      "",
+      "</details>"
+    ],
+    "description": "Collapsible details block"
+  }
+}
