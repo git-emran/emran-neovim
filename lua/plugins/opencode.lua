@@ -25,7 +25,7 @@ return {
         require('opencode').setup {
             preferred_picker = 'telescope',
             preferred_completion = 'blink',
-            default_mode = 'plan',
+            default_mode = 'build',
             display_cost = true,
             display_model = true,
             default_model = 'openrouter/qwen/qwen3-coder-flash',
