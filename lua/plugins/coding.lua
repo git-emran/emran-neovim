@@ -1,30 +1,4 @@
 return {
-    -- Surrounds code/word in parenthesis
-    {
-        'kylechui/nvim-surround',
-        version = '^3.0.0',
-        event = 'VeryLazy',
-        config = function()
-            require('nvim-surround').setup {
-                keymaps = {
-                    visual = '<leader>s',
-                    visual_line = '<leader>S',
-                },
-            }
-        end,
-    },
-
-    -- Git view
-    {
-        'dinhhuy258/git.nvim',
-        event = 'BufReadPre',
-        opts = {
-            keymaps = {
-                blame = '<Leader>gb',
-                browse = '<Leader>go',
-            },
-        },
-    },
 
     -- Autopair tags and braces
     {
@@ -48,34 +22,6 @@ return {
         end,
     },
 
-    -- Code folding
-    {
-        'chrisgrieser/nvim-origami',
-        event = 'VeryLazy',
-        opts = {
-            foldKeymaps = {
-                setup = false,
-                hOnlyOpensOnFirstColumn = false,
-            },
-            pauseFoldsOnSearch = true,
-            autoFold = {
-                enabled = false,
-            },
-            foldText = {
-                enabled = true,
-                padding = 3,
-                lineCount = {
-                    template = '%d lines',
-                    hlgroup = 'Comment',
-                },
-            },
-        },
-        init = function()
-            vim.opt.foldlevel = 99
-            vim.opt.foldlevelstart = 99
-        end,
-    },
-
     -- Auto <tag> completion
     {
         'windwp/nvim-ts-autotag',
@@ -93,13 +39,5 @@ return {
         config = function(_, opts)
             require('nvim-ts-autotag').setup(opts)
         end,
-    },
-
-    -- Code commenting
-    {
-        'folke/ts-comments.nvim',
-        opts = {},
-        event = 'VeryLazy',
-        enabled = vim.fn.has 'nvim-0.10.0' == 1,
     },
 }

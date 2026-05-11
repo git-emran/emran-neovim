@@ -288,7 +288,6 @@ function M.render()
         '%#StatusLine#%=',
         concat_components {
             vim.diagnostic.status(),
-            M.filepath_component(),
             M.filetype_component(),
             M.encoding_component(),
             M.position_component(),

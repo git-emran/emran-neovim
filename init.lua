@@ -1,61 +1,21 @@
-pcall(function()
-    vim.loader.enable()
-end)
+vim.loader.enable()
 
 -- vim.cmd.colorscheme("miss-dracula")
-
--- Ensure Homebrew binaries are in the path.
 vim.env.PATH = '/opt/homebrew/bin:' .. vim.env.PATH
+
+-- Settings
 
 require 'core.keymaps'
 require 'core.options'
 require 'core.filetypes'
 
--- Setup lazy.nvim if not installed
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
-if not vim.uv.fs_stat(lazypath) then
-    vim.fn.system {
-        'git',
-        'clone',
-        '--filter=blob:none',
-        'https://github.com/folke/lazy.nvim.git',
-        '--branch=stable',
-        lazypath,
-    }
-end
-vim.opt.rtp:prepend(lazypath)
+-- Config
 
---@type LazySpec
-local plugins = 'plugins'
-
--- General setup (order matters here)
 require 'commands'
 require 'autocmds'
 require 'statusline'
 require 'lsp'
+require 'winbar'
 
-require('lazy').setup(plugins, {
-    ui = {
-        border = 'rounded',
-    },
-    rocks = { enabled = false },
-    install = {
-        -- Do not install missing plugins on sfartup.
-        missing = false,
-    },
-    performance = {
-        rtp = {
-            disabled_plugins = {
-                'gzip',
-                'netrwPlugin',
-                'rplugin',
-                'tarPlugin',
-                'tohtml',
-                'tutor',
-                'zipPlugin',
-            },
-        },
-    },
-})
 vim.cmd.packadd 'nvim.undotree'
 require('vim._core.ui2').enable {}

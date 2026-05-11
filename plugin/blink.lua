@@ -1,31 +1,54 @@
--- Auto-completion:
-return {
+local add = require('vim-pack').add
+local on_plugin_update = require('vim-pack').on_plugin_update
+
+-- Auto-completion and snippets.
+add {
+    { src = 'saghen/blink.lib', setup = false },
     {
-        'saghen/blink.cmp',
-        version = '*', -- Use a release tag for stability and prebuilt binaries
-        dependencies = {
-            'L3MON4D3/LuaSnip',
-            'saghen/blink.lib',
-            'rafamadriz/friendly-snippets',
-        },
-        build = function()
-            require('blink.cmp').build():wait(60000)
+        src = 'L3MON4D3/LuaSnip',
+        module_name = 'luasnip',
+        opts = function()
+            return {
+                -- Check if the current snippet was deleted.
+                delete_check_events = 'TextChanged',
+                -- Display a cursor-like placeholder in unvisited nodes
+                -- of the snippet.
+            }
         end,
-        event = 'InsertEnter',
-        lazy = false,
+        on_setup = function()
+            -- Load my custom snippets:
+            require('luasnip.loaders.from_vscode').lazy_load {
+                paths = vim.fn.stdpath 'config' .. '/snippets',
+            }
+
+            vim.keymap.set('i', '<C-r>s', function()
+                require('luasnip.extras.otf').on_the_fly 's'
+            end, { desc = 'Insert on-the-fly snippet' })
+
+            -- Use <C-c> to select a choice in a snippet.
+            vim.keymap.set({ 'i', 's' }, '<C-c>', function()
+                ---@diagnostic disable-next-line: undefined-field
+                if require('luasnip').choice_active() then
+                    require 'luasnip.extras.select_choice'()
+                end
+            end, { desc = 'Select choice' })
+        end,
+    },
+    {
+        src = 'saghen/blink.cmp',
         opts = {
             keymap = {
                 ['<CR>'] = { 'accept', 'fallback' },
                 ['<C-\\>'] = { 'hide', 'fallback' },
                 ['<C-n>'] = { 'select_next', 'show' },
                 ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-                ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
                 ['<C-p>'] = { 'select_prev' },
                 ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
                 ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
             },
             completion = {
                 list = {
+                    -- Insert items while navigating the completion list.
                     selection = { preselect = false, auto_insert = true },
                     max_items = 10,
                 },
@@ -42,8 +65,10 @@ return {
                 },
             },
             snippets = { preset = 'luasnip' },
+            -- Disable command line completion:
             cmdline = { enabled = false },
             sources = {
+                -- Disable some sources in comments and strings.
                 default = function()
                     local sources = { 'lsp', 'buffer' }
                     local ok, node = pcall(vim.treesitter.get_node)
@@ -66,3 +91,9 @@ return {
         },
     },
 }
+
+on_plugin_update('blink.cmp', function()
+    -- TODO: Fix the Task type below.
+    ---@diagnostic disable-next-line: undefined-field
+    require('blink.cmp').build():wait(60000)
+end)
