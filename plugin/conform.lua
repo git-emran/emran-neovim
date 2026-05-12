@@ -24,6 +24,9 @@ add_on_event('BufWritePre', {
                 typescript = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
                 typescriptreact = { 'prettier', name = 'dprint', timeout_ms = 500, lsp_format = 'fallback' },
                 yaml = { 'prettier' },
+                python = { 'ruff_format' },
+                sql = { 'sql_formatter' },
+
                 -- For filetypes without a formatter:
                 ['_'] = { 'trim_whitespace', 'trim_newlines' },
             },
@@ -65,3 +68,4 @@ vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 -- Start auto-formatting by default (and disable with my ToggleFormat command).
 vim.g.autoformat = true
+
