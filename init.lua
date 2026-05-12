@@ -3,6 +3,10 @@ vim.loader.enable()
 -- vim.cmd.colorscheme("miss-dracula")
 vim.env.PATH = '/opt/homebrew/bin:' .. vim.env.PATH
 
+-- Snacks
+vim.cmd 'packadd! snacks.nvim'
+require 'plugins.snacks'
+
 -- Settings
 
 require 'core.keymaps'
