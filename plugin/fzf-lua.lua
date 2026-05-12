@@ -171,6 +171,7 @@ add {
             }
         end,
         on_setup = function()
+            require('fzf-lua').register_ui_select()
             vim.keymap.set({ 'n', 'x' }, '<leader>fb', function()
                 local opts = {
                     winopts = {
