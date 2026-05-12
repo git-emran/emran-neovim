@@ -1,6 +1,6 @@
-local add_on_event = require('vim-pack').add_on_event
+local add = require('vim-pack').add
 
-add_on_event('VimEnter', {
+add {
     {
         src = 'akinsho/toggleterm.nvim',
         module_name = 'toggleterm',
@@ -27,4 +27,4 @@ add_on_event('VimEnter', {
             })
         end,
     },
-})
+}

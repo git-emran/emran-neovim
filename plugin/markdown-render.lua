@@ -1,6 +1,6 @@
 local add_on_event = require('vim-pack').add_on_event
 
-add_on_event('BufEnter', {
+add_on_event('FileType', {
     {
         src = 'MeanderingProgrammer/render-markdown.nvim',
         opts = {

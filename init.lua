@@ -3,23 +3,16 @@ vim.loader.enable()
 -- vim.cmd.colorscheme("miss-dracula")
 vim.env.PATH = '/opt/homebrew/bin:' .. vim.env.PATH
 
--- Snacks
-vim.cmd 'packadd! snacks.nvim'
-require 'plugins.snacks'
-
 -- Settings
-
-require 'core.keymaps'
 require 'core.options'
 require 'core.filetypes'
-
+require 'core.keymaps'
 -- Config
-
 require 'commands'
 require 'autocmds'
 require 'statusline'
-require 'lsp'
 require 'winbar'
+require 'lsp'
 
 vim.cmd.packadd 'nvim.undotree'
 require('vim._core.ui2').enable {}

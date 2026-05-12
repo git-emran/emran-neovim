@@ -1,6 +1,6 @@
 local add_on_event = require('vim-pack').add_on_event
 
-add_on_event('VimEnter', {
+add_on_event('InsertEnter', {
     {
         src = 'monkoose/neocodeium',
 
@@ -35,4 +35,3 @@ add_on_event('VimEnter', {
         end,
     },
 })
-

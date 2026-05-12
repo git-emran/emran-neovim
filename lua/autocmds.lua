@@ -49,7 +49,6 @@ vim.api.nvim_create_autocmd('VimEnter', {
         end
 
         -- Configure git environment.
-        vim.env.GIT_WORK_TREE = vim.env.HOME
         vim.env.GIT_DIR = vim.env.HOME .. '/.cfg'
     end,
 })

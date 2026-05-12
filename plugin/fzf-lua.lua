@@ -54,7 +54,6 @@ add {
         src = 'ibhagwan/fzf-lua',
         opts = function()
             local actions = require 'fzf-lua.actions'
-
             return {
                 { 'border-fused', 'hide' },
                 -- Make stuff better combine with the editor.

@@ -1,6 +1,6 @@
-local add_on_event = require('vim-pack').add_on_event
+local add = require('vim-pack').add
 
-add_on_event('VimEnter', {
+add {
     {
         src = 'rose-pine/neovim',
         module_name = 'rose-pine',
@@ -73,4 +73,4 @@ add_on_event('VimEnter', {
             vim.cmd.colorscheme 'rose-pine'
         end,
     },
-})
+}
