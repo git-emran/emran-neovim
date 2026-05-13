@@ -38,6 +38,9 @@ add_on_event('UIEnter', {
             vim.keymap.set('o', 'R', function()
                 require('flash').remote()
             end, { desc = 'Remote Flash' })
+            vim.keymap.set({ 'n', 'x', 'o' }, 'S', function()
+                require('flash').treesitter()
+            end, { desc = 'Flash Treesitter' })
         end,
     },
 })
