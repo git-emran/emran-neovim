@@ -5,11 +5,8 @@ require 'plugins.snacks'
 -- vim.cmd.colorscheme("miss-dracula")
 vim.env.PATH = '/opt/homebrew/bin:' .. vim.env.PATH
 
--- Settings
-require 'core.options'
-require 'core.filetypes'
-require 'core.keymaps'
--- Config
+require 'settings'
+require 'keymaps'
 require 'commands'
 require 'autocmds'
 require 'statusline'

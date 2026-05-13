@@ -1,3 +1,4 @@
+
 vim.o.number = true -- Make line numbers default (default: false)
 
 -- folding

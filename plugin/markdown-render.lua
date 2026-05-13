@@ -23,27 +23,6 @@ add_on_event('FileType', {
                     scope_highlight = nil,
                 },
             },
-
-            callout = {
-                note = {
-                    raw = '[!NOTE]',
-                    rendered = '󰋽 Note',
-                    highlight = 'RenderMarkdownInfo',
-                    category = 'github',
-                },
-                tip = {
-                    raw = '[!TIP]',
-                    rendered = '󰌶 Tip',
-                    highlight = 'RenderMarkdownSuccess',
-                    category = 'github',
-                },
-            },
-            pipe_table = {
-                enabled = true,
-                padding = 1,
-                head = 'RenderMarkdownTableHead',
-                row = 'RenderMarkdownTableRow',
-            },
         },
     },
 })
