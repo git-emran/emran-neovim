@@ -240,6 +240,10 @@
       "rev": "123a9fb12e7229342f807ec9e6de478b1102b041",
       "src": "https://github.com/folke/ts-comments.nvim"
     },
+    "typst-preview.nvim": {
+      "rev": "87db18b8d19c8b0eed399f52e4c527ce5afe4817",
+      "src": "https://github.com/chomosuke/typst-preview.nvim"
+    },
     "vim-highlighturl": {
       "rev": "7179156ccc68168e7ef8f1eae28edf36911f5a3c",
       "src": "https://github.com/itchyny/vim-highlighturl"
