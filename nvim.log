@@ -4,3 +4,5 @@ WRN 2026-05-12T17:07:57.664 ?.16519    server_start:197: Failed to start server:
 WRN 2026-05-12T17:10:41.946 ?.17143    server_start:197: Failed to start server: operation not permitted: /var/folders/zn/w0djf99s4wv8xltp_h_6dp_00000gn/T/nvim.emranhossain/YSh748/nvim.17143.0
 WRN 2026-05-12T17:10:42.023 ?.17143    server_start:197: Failed to start server: operation not permitted: /var/folders/zn/w0djf99s4wv8xltp_h_6dp_00000gn/T/nvim.emranhossain/YSh748/fzf-lua.1778584242.17143.1
 WRN 2026-05-12T17:12:50.702 ?.18847    server_start:197: Failed to start server: operation not permitted: /var/folders/zn/w0djf99s4wv8xltp_h_6dp_00000gn/T/nvim.emranhossain/z4duEo/nvim.18847.0
+WRN 2026-05-16T17:28:35.695 ?.11374    server_start:197: Failed to start server: operation not permitted: /var/folders/zn/w0djf99s4wv8xltp_h_6dp_00000gn/T/nvim.emranhossain/lD0qsx/nvim.11374.0
+WRN 2026-05-16T17:28:35.772 ?.11374    server_start:197: Failed to start server: operation not permitted: /var/folders/zn/w0djf99s4wv8xltp_h_6dp_00000gn/T/nvim.emranhossain/lD0qsx/fzf-lua.1778930915.11374.1
