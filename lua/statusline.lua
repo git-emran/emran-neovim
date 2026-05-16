@@ -187,23 +187,6 @@ function M.lsp_progress_component()
     }
 end
 
--- Getting the Current Working Directory
-function M.filepath_component()
-    local file = vim.api.nvim_buf_get_name(0)
-
-    if file == '' then
-        return '%#StatuslineItalic#[No Name]'
-    end
-
-    -- Split full file path
-    local parts = vim.split(file, '/', { trimempty = true })
-
-    -- Take last 2 parts → { parent, file }
-    local last_two = table.concat(vim.list_slice(parts, math.max(#parts - 1, 1), #parts), '/')
-
-    return string.format('%%#StatuslineItalic# %%#StatuslineTitle#%s', last_two)
-end
-
 --- The buffer's filetype.
 ---@return string
 function M.filetype_component()
