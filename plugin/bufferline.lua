@@ -21,7 +21,7 @@ add_on_event('VimEnter', {
                     local indicator = (diag.error and icons.ERROR .. ' ' or '') .. (diag.warning and icons.WARN or '')
                     return vim.trim(indicator)
                 end,
-                separator_style = { '|' },
+                separator_style = { '','' },
                 minimum_padding = 1,
                 maximum_padding = 1,
                 maximum_length = 15,
