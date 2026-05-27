@@ -16,6 +16,7 @@ return {
 		"eslint.config.js",
 		"eslint.config.mjs",
 	},
+  workspace_required = true,
 	-- Using roughly the same defaults as nvim-lspconfig.
 	settings = {
 		validate = "on",
@@ -37,12 +38,16 @@ return {
 			showDocumentation = { enable = true },
 		},
 	},
-	before_init = function(params, config)
+	before_init = function(_, config)
 		-- Set the workspace folder setting for correct search of tsconfig.json files etc.
-		config.settings.workspaceFolder = {
-			uri = params.rootPath,
-			name = vim.fn.fnamemodify(params.rootPath, ":t"),
-		}
+    local root_dir = config.root_dir
+    if root_dir then
+      config.settings = config.settings or {}
+      config.settings.workspaceFolder = {
+        uri = root_dir,
+        name = vim.fn.fnamemodify(root_dir, ':t')
+      }
+    end
 	end,
 	---@type table<string, lsp.Handler>
 	handlers = {
