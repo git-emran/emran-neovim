@@ -26,8 +26,7 @@ add({
                         end
 
                         local real_exe = vim.uv.fs_realpath(server_exe) or server_exe
-                        local base = vim.fs.dirname(real_exe)
-
+                        local base = vim.fs.dirname(vim.fs.dirname(real_exe))
                         return {
                             path = vim.fs.joinpath(base, 'Microsoft.VisualStudioCode.RazorExtension.dll'),
                             args = {
@@ -66,6 +65,13 @@ add({
                         dotnet_enable_tests_code_lens = true,
                     },
                 },
+
+                get_language_id = function(_, filetype)
+                  if filetype == 'razor' then
+                    return 'aspnetcorerazor'
+                  end
+                  return filetype
+                end
             })
         end,
     },
