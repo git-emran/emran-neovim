@@ -8,15 +8,23 @@ end
 
 local add = require('vim-pack').add
 
--- Load roslyn eagerly to allow proper startup and solution detection events
 add({
     {
-      src = 'seblyng/roslyn.nvim',
+        src = 'seblyng/roslyn.nvim',
+        opts = {
+            filewatching = 'roslyn', -- Delegate filewatching to the roslyn server instead of Neovim
+        },
         on_setup = function()
             -- Configure roslyn LSP server options via Neovim's LSP config interface
             vim.lsp.config('roslyn', {
                 cmd = { 'roslyn-language-server',
                      '--stdio' },
+                settings = {
+                    ["csharp|background_analysis"] = {
+                        dotnet_analyzer_diagnostics_scope = "openFiles",
+                        dotnet_compiler_diagnostics_scope = "openFiles",
+                    },
+                },
             })
         end,
     },

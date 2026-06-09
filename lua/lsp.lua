@@ -11,6 +11,11 @@ vim.g.inlay_hints = false
 ---@param client vim.lsp.Client
 ---@param bufnr integer
 local function on_attach(client, bufnr)
+    -- Disable semantic tokens for Roslyn LSP in Razor files to prevent freezing and lagging.
+    if client.name == 'roslyn' and (vim.bo[bufnr].filetype == 'razor' or vim.bo[bufnr].filetype == 'cshtml') then
+        client.server_capabilities.semanticTokensProvider = nil
+    end
+
     ---@param lhs string
     ---@param rhs string|function
     ---@param opts string|vim.keymap.set.Opts
