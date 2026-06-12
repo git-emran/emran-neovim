@@ -95,5 +95,5 @@ add {
 on_plugin_update('blink.cmp', function()
     -- TODO: Fix the Task type below.
     ---@diagnostic disable-next-line: undefined-field
-    require('blink.cmp').build():wait(60000)
+    require('blink.cmp').build():pwait()
 end)
