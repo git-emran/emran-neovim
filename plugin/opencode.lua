@@ -48,7 +48,7 @@ add_on_event("BufReadPre", {
 			display_cost = true,
 			display_model = true,
 
-			default_model = "openrouter/qwen/qwen3-coder-flash",
+			default_model = "opencode/north-mini-code-free",
 		},
 	},
 })
