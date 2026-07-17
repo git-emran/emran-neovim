@@ -15,6 +15,15 @@ It is an improvement of `vi` editor from the 1970's. It is a text editor. Vim ha
 A little bit of [Lua](https://www.lua.org/manual/5.4/) knowledge
 Vim motions : [Vim motions](https://neovim.io/doc/user/motion.html) are "cursor motions", you use them to perform editing, navigation and move around without using the mouse.
 
+
+## Why my setup is different ?
+
+If you are using Neovim or thinking of using Neovim, you might have heard of Folke or Lazyvim. Lazyvim is a famous neovim distro because of their lazyloading feature. What is this lazyloading feature ? By default neovim autoloads every plugin you install, but lazyvim `lazy-loads` the plugins when its needed, kinda like lazy loading images in website. 
+
+
+So what I did is that, with custom `autocommands` I have mimicked the lazy-loading feature of lazyvim right inside the default neovim. It makes your neovim less bloated.
+
+
 ## Setup
 
 1. Clone this repository into your Neovim config directory and you are good to go.
