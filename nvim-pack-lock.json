@@ -224,6 +224,10 @@
       "rev": "f675d9a5c58f3b0d6158d665a623f81a62e7bdaf",
       "src": "https://github.com/craftzdog/solarized-osaka.nvim"
     },
+    "techbase.nvim": {
+      "rev": "329d22d2071473eb4ab97734d2e01094c963f4ff",
+      "src": "https://github.com/mcauley-penney/techbase.nvim"
+    },
     "telescope-file-browser.nvim": {
       "rev": "3610dc7dc91f06aa98b11dca5cc30dfa98626b7e",
       "src": "https://github.com/nvim-telescope/telescope-file-browser.nvim"
