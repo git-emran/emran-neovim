@@ -1,5 +1,6 @@
 
 
+
 local add = require('vim-pack').add
 
 add {
@@ -12,8 +13,9 @@ add {
 
         on_setup = function()
             -- apply colorscheme AFTER setup
-            vim.cmd.colorscheme 'techbase'
+            vim.cmd.colorscheme 'entryway' -- or 'techbase'
         end,
     },
 }
+
 
