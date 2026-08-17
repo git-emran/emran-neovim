@@ -3,7 +3,7 @@ local add_on_event = require('vim-pack').add_on_event
 -- Navigation with jump motions.
 add_on_event('UIEnter', {
     {
-        src = 'onion108/flash.nvim',
+        src = 'folke/flash.nvim',
         opts = {
             jump = { nohlsearch = true },
             prompt = {
