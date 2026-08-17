@@ -80,6 +80,10 @@
       "rev": "c7274c48137396526b59d86232eabcdc7fed8a32",
       "src": "https://github.com/onsails/lspkind.nvim"
     },
+    "luna.nvim": {
+      "rev": "4744620fd0d3ce543fbbdad78e035e6e8c80951d",
+      "src": "https://github.com/wtfox/luna.nvim"
+    },
     "markdown-preview.nvim": {
       "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
       "src": "https://github.com/iamcco/markdown-preview.nvim"
