@@ -49,6 +49,7 @@ add_on_event("BufReadPre", {
 			display_model = true,
 
 			default_model = "opencode/north-mini-code-free",
+      max_tokens = 4096
 		},
 	},
 })
