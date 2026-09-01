@@ -23,6 +23,48 @@ If you are using Neovim or thinking of using Neovim, you might have heard of Fol
 
 So what I did is that, with custom `autocommands` I have mimicked the lazy-loading feature of lazyvim right inside the default neovim. It makes your neovim less bloated.
 
+### How I mimicked lazy-loading behaviour
+
+With the use of the neovim api `nvim_create_autocmd` we can create new our own little functions inside neovim. My auto-commands are seperated into few different categories, let's discuss them. 
+
+Usage:
+Since each autocommand will execute depending on the event, available events are, `BufAdd`, `BufCreate`, `BufDelete`, `BufEnter`, `BufFilePost` etc. These are neovim's own api allows us to execute functions depending on this events. The lazy behaviour is acheived utilizing these events. 
+
+How to install any Plugin:
+
+Now the idea here is to have the flexibility to attach or initialize any plugin based on an event. For example I want to initialize `lazy-git` plugin as soon as my neovim has opened. So with the use of API `BufCreate` we can do that. 
+
+Since we are using Neovim's native plugin manager to install and update, structure your file the following way to install any plugin. Why this format? Since `lazyvim` has a wide range of support for most of the plugin along with `vim-pack`. This format will allow you to have that `copy-paste` behaviour that you get from `lazyvim`.
+
+
+File Structure:
+
+```lua
+
+local add_on_event = require('vim-pack').add_on_event
+
+add_on_event(<FileType>,{
+    {
+        src = "name of the plugin"
+        opts = {
+            "available options from the plugin goes here"
+        }
+    }
+    on_setup = function()
+    <Rest of the Funciton>
+    end
+
+} )
+
+
+```
+
+
+`FileType`: Attaches self depending on the fileType this is where you use the neovim's API i.e `BufCreate`
+
+`on_setup` or `format_on_save`: This is where you paste your setup function.   
+
+
 
 ## Setup
 
@@ -32,5 +74,7 @@ So what I did is that, with custom `autocommands` I have mimicked the lazy-loadi
 3. Since my config uses `vim-pack`, You will find that there are some custom local functions inside my `vim-pack.lua` file. Go through them, it should be fairly easy to comprehend why it's there. But I will summarize here a bit. I was using lazy distro for nvim. So lazy loading was something I liked very much. Inside the `vim-pack.lua` file, the custom functions are divided into few categories like, `add_on_event`, `add`, `on_plugin_update` etc are there to lazy load plugins when necessary.
 
 4. Updating the plugins. After you have setup the config manually, What if you want to update stuff ? That is easy too with the new neovim 0.12 with vim command `:lua vim.pack.update()` you can update your plugins.
+
+5. Important: Now if you are using my setup completely, then some of the plugin requres you to download binaries directly into the machine. So look for installing instruction at the top of my plugins.
 
 
