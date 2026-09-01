@@ -23,7 +23,7 @@ If you are using Neovim or thinking of using Neovim, you might have heard of Fol
 
 So what I did is that, with custom `autocommands` I have mimicked the lazy-loading feature of lazyvim right inside the default neovim. It makes your neovim less bloated.
 
-### How I mimicked lazy-loading behaviour
+## How I mimicked lazy-loading behaviour
 
 With the use of the neovim api `nvim_create_autocmd` we can create new our own little functions inside neovim. My auto-commands are seperated into few different categories, let's discuss them. 
 
