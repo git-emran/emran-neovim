@@ -208,6 +208,10 @@
       "rev": "74b06c6c75e4eeb3108ec01852001636d85a932b",
       "src": "https://github.com/nvim-lua/plenary.nvim"
     },
+    "presenting.nvim": {
+      "rev": "aa32b58b86fb1467922396f058cd69b1dc85b6e6",
+      "src": "https://github.com/sotte/presenting.nvim"
+    },
     "quicker.nvim": {
       "rev": "063cc44da1eef8681bbd653b29d3bc961780886a",
       "src": "https://github.com/stevearc/quicker.nvim"
