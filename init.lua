@@ -14,4 +14,10 @@ require 'winbar'
 require 'lsp'
 
 vim.cmd.packadd 'nvim.undotree'
+
+require("slides").setup({
+  options = {
+    mode = "tab",
+  }
+})
 require('vim._core.ui2').enable {}
