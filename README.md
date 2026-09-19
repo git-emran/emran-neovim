@@ -10,7 +10,7 @@ It is an improvement of `vi` editor from the 1970's. It is a text editor. Vim ha
 
 > “I want to operate on this sentence, that block, or that function.”
 
-## What you need to know
+## What you need to know ?
 
 A little bit of [Lua](https://www.lua.org/manual/5.4/) knowledge
 Vim motions : [Vim motions](https://neovim.io/doc/user/motion.html) are "cursor motions", you use them to perform editing, navigation and move around without using the mouse.
