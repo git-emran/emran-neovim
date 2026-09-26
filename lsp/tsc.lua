@@ -1,7 +1,7 @@
--- Install with: npm i -g @typescript/native-preview
+-- Install with: npm i -g typescript
 ---@type vim.lsp.Config
 return {
-  cmd = { 'tsgo', '--lsp', '--stdio' },
+  cmd = { 'tsc', '--lsp', '--stdio' },
   filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact' },
   root_dir = function(bufnr, on_dir)
     local root_markers = {
