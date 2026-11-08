@@ -68,6 +68,10 @@ local function on_attach(client, bufnr)
         end, 'Peek definition')
     end
 
+    if client:supports_method 'textDocument/hover' then
+        keymap('K', vim.lsp.buf.hover, 'Hover info')
+    end
+
     if client:supports_method 'textDocument/signatureHelp' then
         keymap('<C-k>', function()
             -- Close the completion menu first (if open).

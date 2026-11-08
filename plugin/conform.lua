@@ -26,6 +26,7 @@ add_on_event('BufWritePre', {
                 yaml = { 'prettier' },
                 python = { 'ruff_format' },
                 sql = { 'sql_formatter' },
+                zig = { 'zigfmt' },
 
                 -- For filetypes without a formatter:
                 ['_'] = { 'trim_whitespace', 'trim_newlines' },

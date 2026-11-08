@@ -31,6 +31,7 @@ local function install_list()
         'vim',
         'vimdoc',
         'yaml',
+        'zig',
     }
 
     local set = {}
