@@ -60,6 +60,17 @@ add_on_event('BufWritePre', {
             formatters = {
                 -- Require a Prettier configuration file to format.
                 prettier = { require_cwd = true },
+                oxfmt = {
+                  require_cwd = true,
+                  cwd = function (self, ctx)
+                    return require('conform.util').root_file {
+                            '.oxfmtrc.json',
+                            '.oxfmtrc.jsonc',
+                            'oxfmt.config.ts',
+                            'oxfmt.config.mts',
+                    }(self, ctx)
+                  end,
+                }
             },
         },
     },
